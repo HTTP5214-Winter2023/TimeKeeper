@@ -1,2 +1,2 @@
 # TimeKeeper
-# Repository for team TimeKeeper's project
+Repository for team TimeKeeper's project
