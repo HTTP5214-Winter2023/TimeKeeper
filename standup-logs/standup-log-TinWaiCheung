@@ -1,0 +1,23 @@
+1 FEB
+Brainstorming of the features of Timesheet:
+- shouldn't require much input data from the user
+- can track the time of using coding softwares
+- can automatically input data (e.g. date and time) to the timesheet
+- can even record the file type that the users were coding on
+
+
+8 FEB
+Sharing and Researching:
+- There are some extensions from the VS code e.g. Time Master, Code Time, Time Tracker, Compile Time
+
+Time Master,
+https://marketplace.visualstudio.com/items?itemName=iceworks-team.iceworks-time-master
+> Can Check your Code Activity e.g. editor time, active code time, lines added...
+> Can Generate Code Time Summary with Date and Code Activity!!
+
+Code Time,
+https://marketplace.visualstudio.com/items?itemName=softwaredotcom.swdc-vscode
+> More complicated, more functions
+> Have accounts/ teams
+> Personalized Code Time dashboard with code time, code time outside work hours, and meeting time 
+> Can explore Data Visualizations e.g. bars and charts
