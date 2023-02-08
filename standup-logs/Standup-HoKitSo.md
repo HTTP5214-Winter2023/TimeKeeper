@@ -27,3 +27,12 @@
     - Researh on Timesheet Automation
 3. anything that's preventing them from working (a 'blocker')
     - Need Emails from everyone to add into google meetings
+
+## Feb 8th
+1. what team-related work you did since the last stand-up
+    - Researh on Timesheet Automation
+2. what you're gonna do now
+    - Researh on Timesheet Automation
+    - Brainstorm features lists and user journey
+3. anything that's preventing them from working (a 'blocker')
+    - No
