@@ -1,13 +1,4 @@
-1 FEB
-Brainstorming of the features of Timesheet:
-- shouldn't require much input data from the user
-- can track the time of using coding softwares
-- can automatically input data (e.g. date and time) to the timesheet
-- can even record the file type that the users were coding on
-
-
-8 FEB
-Sharing and Researching:
+Research:
 - There are some extensions from the VS code e.g. Time Master, Code Time, Time Tracker, Compile Time
 
 Time Master,
@@ -27,10 +18,3 @@ https://marketplace.visualstudio.com/items?itemName=alexcambose.time-tracker
 > Start/Stop time tracking
 > Set break reminders
 > Hourly salary calculator: Displays how much money you made during the last work session
-
-
-15 FEB
-- Discussion in team on the features of the timesheet
-- Try to follow the video of Connecting Clockify to Google Sheets:
-https://www.youtube.com/watch?v=LCfMUx4ZLSI 
-to know how can the time data be outputed to the excel format.
