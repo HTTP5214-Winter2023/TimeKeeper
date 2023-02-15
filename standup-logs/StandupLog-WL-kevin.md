@@ -9,5 +9,9 @@
 3. Scrummaster Daniel
 4. TODO: do research on solutions and put onto GitHub branch group
 ## Feb 8th, 2023
-
+1. Team standup meeting
+2. Shared research results
+3. Discussed idea with clockify and its API
+4. Made review for Daniel's pull request
+5. Next week: continue researching the API
 ## Feb 15th, 2023
