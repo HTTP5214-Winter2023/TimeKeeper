@@ -10,7 +10,7 @@
 3. anything that's preventing them from working (a 'blocker')
     - No
 
-## Feb 7st
+## Feb 7th
 1. what team-related work you did since the last stand-up
     - Check Clockify API
 2. what you're gonna do now
@@ -18,7 +18,7 @@
 3. anything that's preventing them from working (a 'blocker')
     - No
 
-## Feb 15st
+## Feb 15th
 1. what team-related work you did since the last stand-up
     - Tried using Clockify API to retrieve user id and time entries
     - Brainstorm application feature list
