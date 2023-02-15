@@ -1,6 +1,6 @@
 # Research on Time Track App
 ## Clockify API
-Have to use Clockify, then retrieve data from it.
+Use Clockify on Windows, Mac, Phone, Chrome, then retrieve data from it.
 1. Authentication: "X-Api-Key" in request header
 2. Webhooks:  
   - Timer started/stopped (me/anyone)
