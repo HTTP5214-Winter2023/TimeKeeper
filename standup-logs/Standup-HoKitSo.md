@@ -36,3 +36,14 @@
     - Brainstorm features lists and user journey
 3. anything that's preventing them from working (a 'blocker')
     - No
+
+## Feb 15th
+1. what team-related work you did since the last stand-up
+    - Researh on Timesheet Automation
+    - Brainstorm features lists and user journey
+    - Creating CLI Executable global npm module
+2. what you're gonna do now
+    - Learn Interactive CLI
+    - Brainstorm features lists and user journey
+3. anything that's preventing them from working (a 'blocker')
+    - No
