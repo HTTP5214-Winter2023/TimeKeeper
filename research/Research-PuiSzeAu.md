@@ -3,7 +3,8 @@
 ## Research
 1. Try Clockify on VS Code
 2. Ways to export the data automatically
+3. Explore Clockify and its API on VS Code
 
 ## Idea
-1. Explore Clockify data into Excel
+1. Export Clockify data into Excel
 2. Clockify API
