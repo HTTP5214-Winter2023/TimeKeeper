@@ -27,3 +27,12 @@ Today, I'm going to continue research and begin developing a plan with the team.
 
 Here's a list of stuff that's blocking me from moving ahead with my work:
 - mostly nothing, but time management between other classes has been stressful
+
+## Feb 15th
+
+Last time, I worked on reviewing Clockify API.
+
+Today, I'm going to brainstorm user stories and app features.
+
+Here's a list of stuff that's blocking me from moving ahead with my work:
+- N/a
