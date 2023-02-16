@@ -17,6 +17,6 @@
 ## Feb 15th, 2023
 1. Stand-up meeting
 2. Shared research result on clockify API
-3. Disccussed user stories
-4. Team dicided to ctreate nmp app for clockify
+3. Discussed user stories
+4. Team decided to create nmp app for clockify
 5. Going to learn CLI and use clockify next week
