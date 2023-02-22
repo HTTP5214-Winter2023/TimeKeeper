@@ -24,3 +24,12 @@
     - Making a list of features for our app
 3. anything that's preventing them from working (a 'blocker')
     - No
+
+## Feb 22nd
+1. what team-related work you did since the last stand-up
+    - Doing research on features
+2. what you're gonna do now
+    - Work on being able to get data from Clockify API
+    - Coming up with a list of functions, data, and API calls
+3. anything that's preventing them from working (a 'blocker')
+    - No
