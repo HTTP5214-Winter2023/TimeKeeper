@@ -20,3 +20,11 @@
 3. Discussed user stories
 4. Team decided to create nmp app for clockify
 5. Going to learn CLI and use clockify next week
+## Feb 22th, 2023
+1. Stand-up meeting
+2. lead by Scrum master RaymondLee
+3. Discussed what kind of App we are going to make
+4. Discussed deteailed sub-teams
+5. Joined the CLI team
+6. Going to learn CLI next week
+7. The blocker is short of time, have to work on every assignments at the same time 
