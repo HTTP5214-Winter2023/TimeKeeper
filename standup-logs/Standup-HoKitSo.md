@@ -47,3 +47,14 @@
     - Brainstorm features lists and user journey
 3. anything that's preventing them from working (a 'blocker')
     - No
+
+## Feb 22nd
+1. what team-related work you did since the last stand-up
+    - Learn Interactive CLI
+    - Brainstorm features lists and user journey
+2. what you're gonna do now
+    - Create a nodeJS folder for the application
+    - Able to ask user a question and get the user input from CLI
+    - Have a process flow for the user journey
+3. anything that's preventing them from working (a 'blocker')
+    - No
