@@ -30,3 +30,15 @@
     - Try to convert data to excel format
 3. anything that's preventing them from working (a 'blocker')
     - No
+
+## Feb 22nd
+1. what team-related work you did since the last stand-up
+    - Update stand-up log for PuiSzeAu
+    - Create and Update Research for PuiSzeAu
+    - Brainstorm the features and application structure (npm)
+2. what you're gonna do now
+    - I am in the API team
+    - Have a list of functions, data, and API calls according to the feature list
+    - Able to get data from Clockify API
+3. anything that's preventing them from working (a 'blocker')
+    - No
