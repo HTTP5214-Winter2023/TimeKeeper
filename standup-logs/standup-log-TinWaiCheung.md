@@ -34,3 +34,11 @@ https://marketplace.visualstudio.com/items?itemName=alexcambose.time-tracker
 - Try to follow the video of Connecting Clockify to Google Sheets:
 https://www.youtube.com/watch?v=LCfMUx4ZLSI 
 to know how can the time data be outputed to the excel format.
+
+
+22 FEB
+- Discussion in team to divide our group work into 3 aspects, Command line interface, Clockify API and Excel Report.
+- I joined the Excel Report division as I am more interested in the front-end output.
+Here is the link to our Trello: {[link](https://trello.com/b/CL8l3a0i/http5214-time-keeper)}.
+- Will research on how to create an excel file and printing output on it through code and terminal.
+
