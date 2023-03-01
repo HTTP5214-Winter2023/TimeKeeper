@@ -11,3 +11,10 @@ https://medium.com/jspoint/creating-cli-executable-global-npm-module-5ef734febe3
 1. User interact with the timesheet tracker with CLI
 2. Record Time & other data 
 3. Convert date to excel (VBA)
+
+## CLI-Team: Flow of the application
+1. Check whether the API Key is setup
+    1. If it is not setup, ask for the API Key
+2. Provide a list of funtions
+    1. Export Excel
+    2. Change API Key
