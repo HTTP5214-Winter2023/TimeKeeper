@@ -2,7 +2,8 @@ import fs from 'fs'
 
 const DEFAULT_API_DATA = {
     API_KEY: "",
-    WORKSPACE_ID: ""
+    WORKSPACE_ID: "",
+    USER_ID: ""
 }
 
 export async function readApiConfig() {

@@ -6,7 +6,7 @@ let apiData = await readApiConfig();
 export async function getWorkspaceID() {
   apiData = await readApiConfig();
 
-  let reqUrl = `${clockify}/workspaces`;
+  let reqUrl = `${clockify}/user`;
 
   var response = await fetch(
     reqUrl,
@@ -19,12 +19,19 @@ export async function getWorkspaceID() {
     }
   );
   
-  let workspaceID = await response.json();
-  apiData.WORKSPACE_ID = workspaceID[0].id;
+  let user = await response.json();
+  apiData.WORKSPACE_ID = user.activeWorkspace;
+  apiData.USER_ID = user.id;
   await writeApiConfig(apiData);
 }
 
-export async function getProjects() {
+export async function getClockifyData() {
+  // get all useful data (projects, tasks, timeentries)
+
+
+}
+
+async function getProjects() {
 
   let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects`;
 
