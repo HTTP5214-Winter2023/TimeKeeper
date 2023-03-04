@@ -4,6 +4,8 @@ const clockify = "https://api.clockify.me/api/v1"; //base URL for any Clockify A
 let apiData = await readApiConfig();
 
 export async function getWorkspaceID() {
+  apiData = await readApiConfig();
+
   let reqUrl = `${clockify}/workspaces`;
 
   var response = await fetch(
