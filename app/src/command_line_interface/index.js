@@ -34,11 +34,16 @@ export async function startCli(){
     //Ask the user for the next actions
     const actionPrompt = inquirer.createPromptModule();
     await actionPrompt([{
-        type: "",
-        name: "",
-        message: ""
+      type: 'list',
+      name: 'action',
+      message: 'Please select an action:',
+      choices: [
+        'Export Timesheet into Excel File',
+        'Update API Key',
+        'Update Workspace ID'
+      ],
     }]).then((answers) => {
-
+      console.log(`You selected: ${answers.action}`);
     }).catch((error) => {
         // console.log(error)
     });
