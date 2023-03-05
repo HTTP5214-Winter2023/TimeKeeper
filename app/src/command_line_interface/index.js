@@ -8,7 +8,7 @@ const ACTIONS = {
   EXIT: "exit"
 };
 
-let apiData;
+let config;
 
 const APIKeyPrompt = async function () {
   const APIKeyPrompt = inquirer.createPromptModule();
@@ -21,8 +21,8 @@ const APIKeyPrompt = async function () {
   ])
     .then(async (answers) => {
       //Update API_KEY in JSON file
-      apiData.API_KEY = answers.key;
-      await writeApiConfig(apiData);
+      config.API_KEY = answers.key;
+      await writeApiConfig(config);
       await getWorkspaceID();
     })
     .catch((error) => {
@@ -32,10 +32,10 @@ const APIKeyPrompt = async function () {
 
 export async function startCli(){
 
-    apiData = await readApiConfig();
+    config = await readApiConfig();
 
     //Ask the user to setup API key if it is not setup yet
-    if (!apiData || !apiData.API_KEY || apiData.API_KEY === "") {
+    if (!config || !config.API_KEY || config.API_KEY === "") {
         await APIKeyPrompt();
     };
 
@@ -71,7 +71,7 @@ export async function startCli(){
           break;
       case ACTIONS.SET_API_KEY:
           await APIKeyPrompt();
-          console.log("API Key is updated to", apiData.API_KEY);
+          console.log("API Key is updated to", config.API_KEY);
           break;
       case ACTIONS.EXIT:
           console.log("Terminating Application......");

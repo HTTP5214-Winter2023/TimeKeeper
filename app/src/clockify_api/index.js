@@ -1,10 +1,10 @@
 import { readApiConfig, writeApiConfig } from '../utils.js';
 
 const clockify = "https://api.clockify.me/api/v1"; //base URL for any Clockify API requests
-let apiData = await readApiConfig();
+let config = await readApiConfig();
 
 export async function getWorkspaceID() {
-  apiData = await readApiConfig();
+  config = await readApiConfig();
 
   let reqUrl = `${clockify}/workspaces`;
 
@@ -14,19 +14,19 @@ export async function getWorkspaceID() {
       method: "GET",
       headers: {
         "content-type": "application/json",
-        "X-Api-Key": apiData.API_KEY
+        "X-Api-Key": config.API_KEY
       }
     }
   );
   
   let workspaceID = await response.json();
-  apiData.WORKSPACE_ID = workspaceID[0].id;
-  await writeApiConfig(apiData);
+  config.WORKSPACE_ID = workspaceID[0].id;
+  await writeApiConfig(config);
 }
 
 export async function getProjects() {
 
-  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects`;
+  let reqUrl = `${clockify}/workspaces/${config.WORKSPACE_ID}/projects`;
 
   var response = await fetch(
     reqUrl,
@@ -34,7 +34,7 @@ export async function getProjects() {
       method: "GET",
       headers: {
         "content-type": "application/json",
-        "X-Api-Key": apiData.API_KEY
+        "X-Api-Key": config.API_KEY
       }
     }
   );
