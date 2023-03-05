@@ -1,6 +1,13 @@
 import inquirer from 'inquirer';
 import { readApiConfig, writeApiConfig } from '../utils.js';
 
+const ACTIONS = {
+  EXPORT_EXCEL: "exportExcel",
+  SET_API_KEY: "setApiKey",
+  SET_WROKSPACE_ID: "setWorkplaceId",
+  EXIT: "exit"
+};
+
 let apiData;
 
 const APIKeyPrompt = async function () {
@@ -38,10 +45,17 @@ export async function startCli(){
       name: 'action',
       message: 'Please select an action:',
       choices: [
-        'Export Timesheet into Excel File',
-        'Update API Key',
-        'Update Workspace ID'
-      ],
+        {
+            name: "Export Timesheet to Excel File", 
+            value: ACTIONS.EXPORT_EXCEL
+        },{
+            name: "Update API Key", 
+            value: ACTIONS.SET_API_KEY
+        },{
+            name: "Exit", 
+            value: ACTIONS.EXIT
+        }
+    ],
     }]).then((answers) => {
       console.log(`You selected: ${answers.action}`);
     }).catch((error) => {
