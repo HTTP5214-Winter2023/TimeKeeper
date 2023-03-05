@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
-import { getWorkspaceID } from "../clockify_api/index.js";
-import { readApiConfig, writeApiConfig } from '../utils.js';
+import { getWorkspaceID } from "./api.js";
+import { readApiConfig, writeApiConfig } from './utils.js';
 
 const ACTIONS = {
   EXPORT_EXCEL: "exportExcel",

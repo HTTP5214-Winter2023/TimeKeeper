@@ -1,4 +1,4 @@
-import { readApiConfig, writeApiConfig } from '../utils.js';
+import { readApiConfig, writeApiConfig } from './utils.js';
 
 const clockify = "https://api.clockify.me/api/v1"; //base URL for any Clockify API requests
 let config = await readApiConfig();
