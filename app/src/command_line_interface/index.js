@@ -1,10 +1,10 @@
 import inquirer from 'inquirer';
+import { getWorkspaceID } from "../clockify_api/index.js";
 import { readApiConfig, writeApiConfig } from '../utils.js';
 
 const ACTIONS = {
   EXPORT_EXCEL: "exportExcel",
   SET_API_KEY: "setApiKey",
-  SET_WROKSPACE_ID: "setWorkplaceId",
   EXIT: "exit"
 };
 
@@ -23,6 +23,7 @@ const APIKeyPrompt = async function () {
       //Update API_KEY in JSON file
       apiData.API_KEY = answers.key;
       await writeApiConfig(apiData);
+      await getWorkspaceID();
     })
     .catch((error) => {
       console.log(error);
@@ -39,6 +40,7 @@ export async function startCli(){
     };
 
     //Ask the user for the next actions
+    let action;
     const actionPrompt = inquirer.createPromptModule();
     await actionPrompt([{
       type: 'list',
@@ -57,9 +59,25 @@ export async function startCli(){
         }
     ],
     }]).then((answers) => {
-      console.log(`You selected: ${answers.action}`);
+      action = answers.action;
     }).catch((error) => {
         // console.log(error)
     });
 
+    //Switch based on usre resposne
+    switch(action){
+      case ACTIONS.EXPORT_EXCEL:
+        console.log("Exporting Excel File......");
+          break;
+      case ACTIONS.SET_API_KEY:
+          await APIKeyPrompt();
+          console.log("API Key is updated to", apiData.API_KEY);
+          break;
+      case ACTIONS.EXIT:
+          console.log("Terminating Application......");
+          process.exit();
+  };
+
+  // Back to the menu
+  await startCli()
 }

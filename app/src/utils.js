@@ -17,5 +17,5 @@ export async function readApiConfig() {
 };
 
 export async function writeApiConfig(apiData) {
-    fs.writeFile("config.json", JSON.stringify(apiData, null, 2), function () {});
+    await fs.promises.writeFile("config.json", JSON.stringify(apiData, null, 2), function () {});
 };
