@@ -1,3 +1,4 @@
+<!-- Boy am I glad you and your team are keeping a nice, user-friendly repo (as you didn't submit anything on Blackboard) -->
 # Report for HTTP5214 Midterm
 
 ## Feb 1st
