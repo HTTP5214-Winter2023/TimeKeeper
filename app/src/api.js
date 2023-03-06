@@ -1,4 +1,4 @@
-import { readApiConfig, writeApiConfig } from '../utils.js';
+import { readApiConfig, writeApiConfig } from './utils.js';
 
 // Object constructors
 function Timeentry(id, description, duration) {
