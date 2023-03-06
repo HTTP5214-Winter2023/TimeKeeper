@@ -1,32 +1,29 @@
 import { readApiConfig, writeApiConfig } from './utils.js';
 
-const clockify = "https://api.clockify.me/api/v1"; //base URL for any Clockify API requests
-let config = await readApiConfig();
-
-export async function getWorkspaceID() {
-  config = await readApiConfig();
-
-  let reqUrl = `${clockify}/workspaces`;
-
-  var response = await fetch(
-    reqUrl,
-    {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        "X-Api-Key": config.API_KEY
-      }
-    }
-  );
-  
-  let workspaceID = await response.json();
-  config.WORKSPACE_ID = workspaceID[0].id;
-  await writeApiConfig(config);
+// Object constructors
+function Timeentry(id, description, duration) {
+  this.id = id;
+  this.description = description;
+  this.duration = duration;
+}
+function Task(id, name, timeentries = []) {
+  this.id = id;
+  this.name = name;
+  this.timeentries = timeentries;
+}
+function Project(id, name, tasks = []) {
+  this.id = id;
+  this.name = name;
+  this.tasks = tasks;
 }
 
-export async function getProjects() {
+const clockify = "https://api.clockify.me/api/v1"; //base URL for any Clockify API requests
+let apiData = await readApiConfig();
 
-  let reqUrl = `${clockify}/workspaces/${config.WORKSPACE_ID}/projects`;
+export async function getWorkspaceID() {
+  apiData = await readApiConfig();
+
+  let reqUrl = `${clockify}/user`;
 
   var response = await fetch(
     reqUrl,
@@ -34,10 +31,61 @@ export async function getProjects() {
       method: "GET",
       headers: {
         "content-type": "application/json",
-        "X-Api-Key": config.API_KEY
+        "X-Api-Key": apiData.API_KEY
       }
     }
   );
   
+  let user = await response.json();
+  apiData.WORKSPACE_ID = user.activeWorkspace;
+  apiData.USER_ID = user.id;
+  await writeApiConfig(apiData);
+}
+
+export async function getClockifyData() {
+  // get all useful data (projects, tasks, timeentries)
+  // var json_projects = await getProjects();
+  // for (const json_project of json_projects) {
+  //   var projects = [];
+  //   var json_tasks = await getTasks(json_project.id);
+  //   for (const json_task of json_tasks) {
+  //     var tasks = [];
+  //     var json_timeentries = await getTimeentries(json_task.id);
+  //     for (const json_timeentry of json_timeentries) {
+  //       var timeentries = [];
+  //       var timeentry = new Timeentry(json_timeentry.id, json_timeentry.description, json_timeentry.timeInterval.duration);
+  //       timeentries.push(timeentry);
+  //     };
+  //     var task = new Task(json_task.id, json_task.name, timeentries);
+  //     tasks.push(task);
+  //   };
+  //   var project = new Project(json_project.id, json_project.name, tasks);
+  //   projects.push(project);
+  // };
+  // console.log(projects);
+  // return projects;
+  console.log(await getTimeentries("63ecf2a3feb6c4526152291e"));
+}
+
+async function getProjects() {
+}
+
+async function getTasks(id) {
+}
+
+async function getTimeentries(id) {
+  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/user/${apiData.USER_ID}/time-entries?task=${id}`;
+
+  var response = await fetch(
+    reqUrl,
+    {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        "X-Api-Key": apiData.API_KEY
+      }
+    }
+  );
+
   return await response.json();
 }
