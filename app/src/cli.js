@@ -1,5 +1,6 @@
 import inquirer from 'inquirer';
 import { getWorkspaceID } from "./api.js";
+import { getClockifyData } from "./api.js";
 import { readApiConfig, writeApiConfig } from './utils.js';
 
 const ACTIONS = {
@@ -67,6 +68,7 @@ export async function startCli(){
     //Switch based on usre resposne
     switch(action){
       case ACTIONS.EXPORT_EXCEL:
+        await getClockifyData();
         console.log("Exporting Excel File......");
           break;
       case ACTIONS.SET_API_KEY:
