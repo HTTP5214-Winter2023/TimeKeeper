@@ -35,7 +35,7 @@ export async function getWorkspaceID() {
       }
     }
   );
-  
+
   let user = await response.json();
   apiData.WORKSPACE_ID = user.activeWorkspace;
   apiData.USER_ID = user.id;
@@ -64,12 +64,12 @@ export async function getClockifyData() {
   // };
   // console.log(projects);
   // return projects;
+  console.log(await getTasks());
   console.log(await getProjects());
   console.log(await getTimeentries("63ecf2a3feb6c4526152291e"));
 }
 
 async function getProjects() {
-
   let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects`;
 
   var response = await fetch(
@@ -82,12 +82,24 @@ async function getProjects() {
       }
     }
   );
-  
+
   return await response.json();
 }
 
-
 async function getTasks(id) {
+  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects/${id}/tasks`;
+
+  var response = await fetch(
+    reqUrl,
+    {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        "X-Api-Key": apiData.API_KEY
+      }
+    }
+  );
+  return await response.json();
 }
 
 async function getTimeentries(id) {
@@ -106,6 +118,3 @@ async function getTimeentries(id) {
 
   return await response.json();
 }
-
-
-
