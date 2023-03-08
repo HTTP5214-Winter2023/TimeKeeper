@@ -70,11 +70,24 @@ export async function getClockifyData() {
 }
 
 async function getProjects() {
+  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects`;
 
+  var response = await fetch(
+    reqUrl,
+    {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        "X-Api-Key": apiData.API_KEY
+      }
+    }
+  );
+
+  return await response.json();
 }
 
 async function getTasks(id) {
-  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects/${apiData.PROJECT_ID}`;
+  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects/${id}/tasks`;
 
   var response = await fetch(
     reqUrl,
