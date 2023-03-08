@@ -44,6 +44,8 @@ export async function getWorkspaceID() {
     return true;
   }
   else {
+    //Remove invalid api key
+    await writeApiConfig({});
     return false;
   }
 }

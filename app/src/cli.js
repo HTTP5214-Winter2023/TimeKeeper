@@ -1,6 +1,5 @@
 import inquirer from 'inquirer';
-import { getWorkspaceID } from "./api.js";
-import { getClockifyData } from "./api.js";
+import { getWorkspaceID, getClockifyData } from "./api.js";
 import { readApiConfig, writeApiConfig } from './utils.js';
 
 const ACTIONS = {
@@ -11,7 +10,7 @@ const ACTIONS = {
 
 let config;
 
-const APIKeyPrompt = async function () {
+const callAPIKeyPrompt = async function () {
   const APIKeyPrompt = inquirer.createPromptModule();
   await APIKeyPrompt([
     {
@@ -24,7 +23,13 @@ const APIKeyPrompt = async function () {
       //Update API_KEY in JSON file
       config.API_KEY = answers.key;
       await writeApiConfig(config);
-      await getWorkspaceID();
+      let isValid = await getWorkspaceID();
+      if (!isValid) {
+        console.log("The provided API Key is invalid, please visit https://app.clockify.me/user/settings to get your api Key.")
+        await callAPIKeyPrompt();
+      } else { 
+        console.log("API Key is updated to", config.API_KEY);
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -37,7 +42,8 @@ export async function startCli(){
 
     //Ask the user to setup API key if it is not setup yet
     if (!config || !config.API_KEY || config.API_KEY === "") {
-        await APIKeyPrompt();
+      console.log("You may visit https://app.clockify.me/user/settings to get your api Key.")
+      await callAPIKeyPrompt();
     };
 
     //Ask the user for the next actions
@@ -72,8 +78,7 @@ export async function startCli(){
         console.log("Exporting Excel File......");
           break;
       case ACTIONS.SET_API_KEY:
-          await APIKeyPrompt();
-          console.log("API Key is updated to", config.API_KEY);
+          await callAPIKeyPrompt();
           break;
       case ACTIONS.EXIT:
           console.log("Terminating Application......");
