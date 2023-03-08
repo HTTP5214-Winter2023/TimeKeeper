@@ -74,7 +74,7 @@ async function getProjects() {
 }
 
 async function getTasks(id) {
-  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects/${apiData.PROJECT_ID}/tasks/task=${id}`;
+  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects/${apiData.PROJECT_ID}`;
 
   var response = await fetch(
     reqUrl,
