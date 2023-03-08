@@ -35,11 +35,17 @@ export async function getWorkspaceID() {
       }
     }
   );
-  
-  let user = await response.json();
-  apiData.WORKSPACE_ID = user.activeWorkspace;
-  apiData.USER_ID = user.id;
-  await writeApiConfig(apiData);
+
+  if (response.status === 200) {
+    let user = await response.json();
+    apiData.WORKSPACE_ID = user.activeWorkspace;
+    apiData.USER_ID = user.id;
+    await writeApiConfig(apiData);
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 export async function getClockifyData() {
