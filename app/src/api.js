@@ -44,33 +44,59 @@ export async function getWorkspaceID() {
 
 export async function getClockifyData() {
   // get all useful data (projects, tasks, timeentries)
-  // var json_projects = await getProjects();
-  // for (const json_project of json_projects) {
-  //   var projects = [];
-  //   var json_tasks = await getTasks(json_project.id);
-  //   for (const json_task of json_tasks) {
-  //     var tasks = [];
-  //     var json_timeentries = await getTimeentries(json_task.id);
-  //     for (const json_timeentry of json_timeentries) {
-  //       var timeentries = [];
-  //       var timeentry = new Timeentry(json_timeentry.id, json_timeentry.description, json_timeentry.timeInterval.duration);
-  //       timeentries.push(timeentry);
-  //     };
-  //     var task = new Task(json_task.id, json_task.name, timeentries);
-  //     tasks.push(task);
-  //   };
-  //   var project = new Project(json_project.id, json_project.name, tasks);
-  //   projects.push(project);
-  // };
-  // console.log(projects);
-  // return projects;
-  console.log(await getTimeentries("63ecf2a3feb6c4526152291e"));
+  var json_projects = await getProjects();
+  for (const json_project of json_projects) {
+    var projects = [];
+    var json_tasks = await getTasks(json_project.id);
+    for (const json_task of json_tasks) {
+      var tasks = [];
+      var json_timeentries = await getTimeentries(json_task.id);
+      for (const json_timeentry of json_timeentries) {
+        var timeentries = [];
+        var timeentry = new Timeentry(json_timeentry.id, json_timeentry.description, json_timeentry.timeInterval.duration);
+        timeentries.push(timeentry);
+      };
+      var task = new Task(json_task.id, json_task.name, timeentries);
+      tasks.push(task);
+    };
+    var project = new Project(json_project.id, json_project.name, tasks);
+    projects.push(project);
+  };
+  console.log(projects);
+  return projects;
 }
 
 async function getProjects() {
+  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects`;
+
+  var response = await fetch(
+    reqUrl,
+    {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        "X-Api-Key": apiData.API_KEY
+      }
+    }
+  );
+
+  return await response.json();
 }
 
 async function getTasks(id) {
+  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects/${id}/tasks`;
+
+  var response = await fetch(
+    reqUrl,
+    {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        "X-Api-Key": apiData.API_KEY
+      }
+    }
+  );
+  return await response.json();
 }
 
 async function getTimeentries(id) {

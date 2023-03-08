@@ -36,3 +36,19 @@ Today, I'm going to brainstorm user stories and app features.
 
 Here's a list of stuff that's blocking me from moving ahead with my work:
 - N/a
+
+## Feb 22nd
+
+Last time, I worked on familiarising myself with Clockify API and how it will work with our project. 
+
+Today, I'm going to practice/test the API. 
+
+Nothing is currently blocking me from moving ahead with my work.
+
+## Mar 8th
+
+Last time, I worked on testing the app in the command line and adding a getProducts() function to app.js.
+
+Today, I'm going to touch base with the team working on the api functions and make sure we are on the same page.
+
+Nothing is currently blocking me.
