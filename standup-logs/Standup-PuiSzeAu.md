@@ -42,3 +42,13 @@
     - Able to get data from Clockify API
 3. anything that's preventing them from working (a 'blocker')
     - No
+
+## Mar 8th
+1. what team-related work you did since the last stand-up
+    - Update stand-up log for PuiSzeAu
+    - API Team: Create function getWorkspaceID() and getClockifyData()
+    - Have a list of data for timesheet excel
+2. what you're gonna do now
+    - API Team: Create function the start and stop timer
+3. anything that's preventing them from working (a 'blocker')
+    - No

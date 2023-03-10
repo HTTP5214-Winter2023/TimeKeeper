@@ -36,37 +36,42 @@ export async function getWorkspaceID() {
     }
   );
 
-  let user = await response.json();
-  apiData.WORKSPACE_ID = user.activeWorkspace;
-  apiData.USER_ID = user.id;
-  await writeApiConfig(apiData);
+  if (response.status === 200) {
+    let user = await response.json();
+    apiData.WORKSPACE_ID = user.activeWorkspace;
+    apiData.USER_ID = user.id;
+    await writeApiConfig(apiData);
+    return true;
+  }
+  else {
+    //Remove invalid api key
+    await writeApiConfig({});
+    return false;
+  }
 }
 
 export async function getClockifyData() {
   // get all useful data (projects, tasks, timeentries)
-  // var json_projects = await getProjects();
-  // for (const json_project of json_projects) {
-  //   var projects = [];
-  //   var json_tasks = await getTasks(json_project.id);
-  //   for (const json_task of json_tasks) {
-  //     var tasks = [];
-  //     var json_timeentries = await getTimeentries(json_task.id);
-  //     for (const json_timeentry of json_timeentries) {
-  //       var timeentries = [];
-  //       var timeentry = new Timeentry(json_timeentry.id, json_timeentry.description, json_timeentry.timeInterval.duration);
-  //       timeentries.push(timeentry);
-  //     };
-  //     var task = new Task(json_task.id, json_task.name, timeentries);
-  //     tasks.push(task);
-  //   };
-  //   var project = new Project(json_project.id, json_project.name, tasks);
-  //   projects.push(project);
-  // };
-  // console.log(projects);
-  // return projects;
-  console.log(await getTasks());
-  console.log(await getProjects());
-  console.log(await getTimeentries("63ecf2a3feb6c4526152291e"));
+  var json_projects = await getProjects();
+  for (const json_project of json_projects) {
+    var projects = [];
+    var json_tasks = await getTasks(json_project.id);
+    for (const json_task of json_tasks) {
+      var tasks = [];
+      var json_timeentries = await getTimeentries(json_task.id);
+      for (const json_timeentry of json_timeentries) {
+        var timeentries = [];
+        var timeentry = new Timeentry(json_timeentry.id, json_timeentry.description, json_timeentry.timeInterval.duration);
+        timeentries.push(timeentry);
+      };
+      var task = new Task(json_task.id, json_task.name, timeentries);
+      tasks.push(task);
+    };
+    var project = new Project(json_project.id, json_project.name, tasks);
+    projects.push(project);
+  };
+  console.log(projects);
+  return projects;
 }
 
 async function getProjects() {
