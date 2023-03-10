@@ -58,3 +58,14 @@
     - Have a process flow for the user journey
 3. anything that's preventing them from working (a 'blocker')
     - No
+
+## March 8th
+1. what team-related work you did since the last stand-up
+    - Create a CLI for the project
+    - Able to handle user API Key
+    - Able to handle user action response
+2. what you're gonna do now
+    - Handle start/stop timer
+    - Distribute tasks for CLI Team
+3. anything that's preventing them from working (a 'blocker')
+    - No
