@@ -42,3 +42,8 @@ to know how can the time data be outputed to the excel format.
 Here is the link to our Trello: {[link](https://trello.com/b/CL8l3a0i/http5214-time-keeper)}.
 - Will research on how to create an excel file and printing output on it through code and terminal.
 
+
+8 MAR
+- participate in the coding of Creating an excel file
+- help to do the planning of the next few weeks and writing the scope for our project
+- will keep on trying to export the data to excel file
