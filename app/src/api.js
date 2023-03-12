@@ -74,7 +74,7 @@ export async function getClockifyData() {
   return projects;
 }
 
-async function getProjects() {
+export async function getProjects() {
   let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects`;
 
   var response = await fetch(
@@ -87,11 +87,11 @@ async function getProjects() {
       }
     }
   );
-
+  
   return await response.json();
 }
 
-async function getTasks(id) {
+export async function getTasks(id) {
   let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects/${id}/tasks`;
 
   var response = await fetch(
@@ -104,11 +104,15 @@ async function getTasks(id) {
       }
     }
   );
+  
   return await response.json();
 }
 
-async function getTimeentries(id) {
-  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/user/${apiData.USER_ID}/time-entries?task=${id}`;
+async function getTimeentries(id = 0) {
+  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/user/${apiData.USER_ID}/time-entries`;
+  if (id != 0) {
+    reqUrl += `?task=${id}`;
+  }
 
   var response = await fetch(
     reqUrl,
@@ -122,4 +126,36 @@ async function getTimeentries(id) {
   );
 
   return await response.json();
+}
+
+// use await startTimer("Writing documentation","63ecf25eee569c5821aed6ff","63ecf2a3feb6c4526152291e") to test function;
+export async function startTimer(description, projectId, taskId) {
+  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/time-entries`;
+
+  let now = new Date();
+  let postRequest = {
+    "start": now.toISOString(),
+    "billable": "true",
+    "description": description,
+    "projectId": projectId,
+    "taskId": taskId
+  };
+
+  var response = await fetch(
+    reqUrl,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "X-Api-Key": apiData.API_KEY,
+      },
+      body: JSON.stringify(postRequest)
+    }
+  );
+  
+  return await response.json();
+}
+
+export async function stopTimer() {
+
 }
