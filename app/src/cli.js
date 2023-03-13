@@ -42,10 +42,10 @@ const callStartTimerPrompt = async function () {
   //Let users to select the projects
   const projects = await getProjects();
 
-  let selectedProjectId;
+  let selectedProject;
   let projectChoices = [];
   let taskChoices = [];
-  projects.forEach( p => projectChoices.push({ name: p.name, value: p.id}));
+  projects.forEach( p => projectChoices.push({ name: p.name, value: p}));
   projectChoices.push({
     name: "New Project",
     value: null
@@ -53,17 +53,17 @@ const callStartTimerPrompt = async function () {
 
   await startTimerPrompt([{
     type: 'list',
-    name: 'projectId',
+    name: 'project',
     message: 'Which project would you like to work on?',
     choices: projectChoices,
   }]).then(async(answers) => {
-    selectedProjectId = answers.projectId;
+    selectedProject = answers.project;
   }).catch((error) => {
     console.log(error)
   });
 
   //If New Project is selected, create a new project
-  if (!selectedProjectId) {
+  if (!selectedProject) {
     const addNewProjectPrompt = inquirer.createPromptModule();
     await addNewProjectPrompt([{
       type: "input",
@@ -77,27 +77,27 @@ const callStartTimerPrompt = async function () {
   }
 
   //Let users to select the tasks
-  let selectedTaskId;
-  let tasks = await getTasks(selectedProjectId);
+  let selectedTask;
+  let tasks = await getTasks(selectedProject.id);
   tasks.forEach( t => {
-    taskChoices.push({ name: t.name, value: t.id});
+    taskChoices.push({ name: t.name, value: t});
   });
   taskChoices.push({name: "New Task", value: null});
 
   const selectTasksPrompt = inquirer.createPromptModule();
   await selectTasksPrompt([{
     type: 'list',
-    name: 'taskId',
+    name: 'task',
     message: 'Which task would you like to work on?',
     choices: taskChoices,
   }]).then(async(answers) => {
-    selectedTaskId = answers.taskId;
+    selectedTask = answers.task;
   }).catch((error) => {
       console.log(error)
   });
 
   //If New Task is selected, create a new task
-  if (!selectedTaskId) {
+  if (!selectedTask) {
     const addNewTaskPrompt = inquirer.createPromptModule();
     await addNewTaskPrompt([{
       type: "input",
@@ -111,16 +111,20 @@ const callStartTimerPrompt = async function () {
   }
 
   //Start a new time entries
+  let description;
   const addNewEntryPrompt = inquirer.createPromptModule();
   await addNewEntryPrompt([{
     type: "input",
     name: "entryDescription",
     message: "Please provide a brief description?",
   }]).then(async (answers) => {
-    await startTimer(answers.entryDescription, selectedProjectId, selectedTaskId);
+    description = answers.entryDescription;
+    await startTimer(description, selectedProject.id, selectedTask.id);
   }).catch((error) => {
     console.log(error)
   });
+
+  console.log(`A timer has been started for ${description} on ${selectedProject.name} - ${selectedTask.name}`)
 };
 
 export async function startCli(){
