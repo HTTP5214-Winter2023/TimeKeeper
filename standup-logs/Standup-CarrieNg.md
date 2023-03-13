@@ -33,3 +33,12 @@
     - Coming up with a list of functions, data, and API calls
 3. anything that's preventing them from working (a 'blocker')
     - No
+
+## Mar 8th
+1. what team-related work you did since the last stand-up
+    - I worked on the getTasks function feature for the API calls. 
+2. what you're gonna do now
+    - Work with the API team on the StopTimer, StartTimer, and TrackTime features
+    - Test out the current command line interface
+3. anything that's preventing them from working (a 'blocker')
+    - No
