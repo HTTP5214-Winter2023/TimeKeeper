@@ -1,5 +1,5 @@
 import inquirer from 'inquirer';
-import { getWorkspaceID, getClockifyData } from "./api.js";
+import { getWorkspaceID, getClockifyData, getProjects, getTasks, startTimer, stopTimer } from "./api.js";
 import { readApiConfig, writeApiConfig } from './utils.js';
 
 const ACTIONS = {
