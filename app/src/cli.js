@@ -229,6 +229,9 @@ export async function startCli() {
     case ACTIONS.START_TIMER:
       await callStartTimerPrompt();
       break;
+    case ACTIONS.STOP_CURRENT_TIMER:
+      await callStopTimerPrompt();
+      break;
     case ACTIONS.EXPORT_EXCEL:
       await getClockifyData();
       console.log("Exporting Excel File......");
