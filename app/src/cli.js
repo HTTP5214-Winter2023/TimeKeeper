@@ -76,20 +76,6 @@ const callStartTimerPrompt = async function () {
     .catch((error) => {
       console.log(error);
     });
-  await startTimerPrompt([
-    {
-      type: "list",
-      name: "project",
-      message: "Which project would you like to work on?",
-      choices: projectChoices,
-    },
-  ])
-    .then(async (answers) => {
-      selectedProject = answers.project;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
 
   //If New Project is selected, create a new project
   if (!selectedProject) {
@@ -230,7 +216,7 @@ export async function startCli() {
       await callStartTimerPrompt();
       break;
     case ACTIONS.STOP_CURRENT_TIMER:
-      await callStopTimerPrompt();
+      await stopTimer();
       break;
     case ACTIONS.EXPORT_EXCEL:
       await getClockifyData();
