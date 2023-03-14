@@ -108,7 +108,7 @@ export async function getTasks(id) {
   return await response.json();
 }
 
-async function getTimeentries(id = 0) {
+export async function getTimeentries(id = 0) {
   let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/user/${apiData.USER_ID}/time-entries`;
   if (id != 0) {
     reqUrl += `?task=${id}`;
