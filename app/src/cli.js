@@ -69,8 +69,8 @@ const callProjectPrompt = async function (projects) {
 
   // Call the getTasks() function to retrieve the list of tasks for the selected project
   const tasks = await getTasks(answer.project);
-
-  var tableData = []; // create an array to store the table data objects
+  // create an array to store the task details data objects
+  var tasksData = [];
 
   for (const task of tasks) {
     const timeentries = await getTimeentries(task.id);
@@ -83,21 +83,19 @@ const callProjectPrompt = async function (projects) {
       var endTime = entry.timeInterval.end;
       var description = entry.description || "No description";
 
-      // add the table data object to the array
-      tableData.push({
+      // add the time entry data object to the array
+      tasksData.push({
         Start: timeConvert(startTime),
         End: timeConvert(endTime),
         Duration: duration,
         Description: description,
       });
     }
-    console.table(tableData); // display the table
-    tableData = [];
+    // display the task data in a table format
+    console.table(tasksData); 
+    tasksData = [];
   } 
 }
-
-
-
 
 
 const callStartTimerPrompt = async function () {
