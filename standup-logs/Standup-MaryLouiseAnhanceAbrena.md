@@ -60,4 +60,3 @@ Today, I'm going to touch base with the team and catch up with everything on a c
 
 Here's a list of stuff that's blocking me from moving ahead with my work:
 - Familiarizing myself with the whole project
-- CLI: creating choice "Stop Current Timer" to ActionPrompt
