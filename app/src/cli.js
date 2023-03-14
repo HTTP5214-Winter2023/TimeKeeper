@@ -195,12 +195,12 @@ export async function startCli() {
       message: "Please select an action:",
       choices: [
         {
-          name: "Stop Current Timer",
-          value: ACTIONS.STOP_CURRENT_TIMER,
-        },
-        {
           name: "Start a New Timer",
           value: ACTIONS.START_TIMER,
+        },
+        {
+          name: "Stop Current Timer",
+          value: ACTIONS.STOP_CURRENT_TIMER,
         },
         {
           name: "Export Timesheet to Excel File",
