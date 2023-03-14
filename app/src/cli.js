@@ -8,7 +8,7 @@ import {
   startTimer,
   stopTimer,
 } from "./api.js";
-import { readApiConfig, writeApiConfig } from "./utils.js";
+import { readApiConfig, writeApiConfig, formatDuration, timeConvert } from "./utils.js";
 
 const ACTIONS = {
   EXPORT_EXCEL: "exportExcel",
@@ -49,27 +49,7 @@ const callAPIKeyPrompt = async function () {
     });
 };
 
-// change duration format 'PT1H4M' to '01:04'
-function formatDuration(durationStr) {
-  if (!durationStr) {
-    return "N/A";
-  }
-  var duration = /P(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?/g.exec(durationStr);
-  var hours = parseInt(duration[2]) || 0;
-  var minutes = parseInt(duration[3]) || 0;
-  var timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-  return timeString;
-}
 
-// change startTime || endTime format '2023-03-14T01:49:59Z' to '2023-03-14 01:49:59'
-function timeConvert(dateString) {
-  if (!dateString) {
-    return "N/A";
-  }
-  var date = dateString.slice(0, 10);
-  var time = dateString.slice(11, 19);
-  return date +" "+ time;
-}
 
 const callProjectPrompt = async function (projects) {
   const projectPrompt = inquirer.createPromptModule();
@@ -90,23 +70,33 @@ const callProjectPrompt = async function (projects) {
   // Call the getTasks() function to retrieve the list of tasks for the selected project
   const tasks = await getTasks(answer.project);
 
-for (const task of tasks) {
-  const timeentries = await getTimeentries(task.id);
+  var tableData = []; // create an array to store the table data objects
 
-  console.log("\x1b[36m%s\x1b[0m","Task Name: "+task.name);
+  for (const task of tasks) {
+    const timeentries = await getTimeentries(task.id);
 
-  for (const entry of timeentries) {
-    var duration = formatDuration(entry.timeInterval.duration);
-    var startTime = entry.timeInterval.start;
-    var endTime = entry.timeInterval.end;
-    var description = entry.description || "No description";
+    console.log("\x1b[36m%s\x1b[0m","Task Name: "+task.name);
 
-    console.table(
-      [{ Start: timeConvert(startTime), End:timeConvert(endTime), Duration: duration, Description: description }]
-    );
-  }   
+    for (const entry of timeentries) {
+      var duration = formatDuration(entry.timeInterval.duration);
+      var startTime = entry.timeInterval.start;
+      var endTime = entry.timeInterval.end;
+      var description = entry.description || "No description";
+
+      // add the table data object to the array
+      tableData.push({
+        Start: timeConvert(startTime),
+        End: timeConvert(endTime),
+        Duration: duration,
+        Description: description,
+      });
+    }
+    console.table(tableData); // display the table
+    tableData = [];
+  } 
 }
-};
+
+
 
 
 
