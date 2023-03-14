@@ -4,6 +4,7 @@ import {
   getClockifyData,
   getProjects,
   getTasks,
+  getTimeentries,
   startTimer,
   stopTimer,
 } from "./api.js";
@@ -14,6 +15,7 @@ const ACTIONS = {
   SET_API_KEY: "setApiKey",
   START_TIMER: "startTimer",
   STOP_CURRENT_TIMER: "stopTimer",
+  CHECK_PROJECTS: "checkProjects",
   EXIT: "exit",
 };
 
@@ -46,6 +48,67 @@ const callAPIKeyPrompt = async function () {
       console.log(error);
     });
 };
+
+// change duration format 'PT1H4M' to '01:04'
+function formatDuration(durationStr) {
+  if (!durationStr) {
+    return "N/A";
+  }
+  var duration = /P(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?/g.exec(durationStr);
+  var hours = parseInt(duration[2]) || 0;
+  var minutes = parseInt(duration[3]) || 0;
+  var timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+  return timeString;
+}
+
+// change startTime || endTime format '2023-03-14T01:49:59Z' to '2023-03-14 01:49:59'
+function timeConvert(dateString) {
+  if (!dateString) {
+    return "N/A";
+  }
+  var date = dateString.slice(0, 10);
+  var time = dateString.slice(11, 19);
+  return date +" "+ time;
+}
+
+const callProjectPrompt = async function (projects) {
+  const projectPrompt = inquirer.createPromptModule();
+  var projects = await getProjects();
+
+  const answer = await projectPrompt([
+    {
+      type: 'list',
+      name: 'project',
+      message: 'Please select a project:',
+      choices: projects.map(project => ({
+        name: project.name,
+        value: project.id
+      })),
+    }
+  ])
+
+  // Call the getTasks() function to retrieve the list of tasks for the selected project
+  const tasks = await getTasks(answer.project);
+
+for (const task of tasks) {
+  const timeentries = await getTimeentries(task.id);
+
+  console.log("\x1b[36m%s\x1b[0m","Task Name: "+task.name);
+
+  for (const entry of timeentries) {
+    var duration = formatDuration(entry.timeInterval.duration);
+    var startTime = entry.timeInterval.start;
+    var endTime = entry.timeInterval.end;
+    var description = entry.description || "No description";
+
+    console.table(
+      [{ Start: timeConvert(startTime), End:timeConvert(endTime), Duration: duration, Description: description }]
+    );
+  }   
+}
+};
+
+
 
 const callStartTimerPrompt = async function () {
   const startTimerPrompt = inquirer.createPromptModule();
@@ -189,6 +252,10 @@ export async function startCli() {
           value: ACTIONS.STOP_CURRENT_TIMER,
         },
         {
+          name: "Check Projects List", 
+          value: ACTIONS.CHECK_PROJECTS
+        },
+        {
           name: "Export Timesheet to Excel File",
           value: ACTIONS.EXPORT_EXCEL,
         },
@@ -217,6 +284,9 @@ export async function startCli() {
       break;
     case ACTIONS.STOP_CURRENT_TIMER:
       await stopTimer();
+      break;
+    case ACTIONS.CHECK_PROJECTS:
+      await callProjectPrompt();
       break;
     case ACTIONS.EXPORT_EXCEL:
       await getClockifyData();
