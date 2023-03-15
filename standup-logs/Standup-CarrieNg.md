@@ -42,3 +42,13 @@
     - Test out the current command line interface
 3. anything that's preventing them from working (a 'blocker')
     - No
+
+## Mar 15th
+1. what team-related work you did since the last stand-up
+    - I worked on the stopTimer function with Michelle on the API team 
+    - We tested to see if the function works and committed to the api.js file 
+2. what you're gonna do now
+    - Work on AddTask and AddProject functions
+    - Work on the scenario and instructions section of the usability test
+3. anything that's preventing them from working (a 'blocker')
+    - No
