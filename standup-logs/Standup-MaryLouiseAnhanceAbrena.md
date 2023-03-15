@@ -60,3 +60,12 @@ Today, I'm going to touch base with the team and catch up with everything on a c
 
 Here's a list of stuff that's blocking me from moving ahead with my work:
 - Familiarizing myself with the whole project
+
+## March 8th
+
+Last time, I worked on editing the cli.js file adding the stopTimer to the actionPrompt choice as well as switch.
+
+Today, I'm going to connect with possible testers of our app and work on wrting out scenarios for the app usability testing.
+
+Here's a list of stuff that's blocking me from moving ahead with my work:
+- Pulling request and merging using the github desktop 
