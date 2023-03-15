@@ -12,29 +12,47 @@ async function createTimesheet(filename) {
 	var jsonData = await getClockifyData();
 	// Loops through each project
 	for (const project of jsonData) {
+		// create a worksheet for the current project
+		var projectWorksheet = XLSX.utils.aoa_to_sheet([
+			["task", "subtask", "time"], // header
+		]);
+		// set taskOrigin
+		var taskOrigin = {
+			r: 1,
+			c: 0,
+		};
 		// Loops through each task
 		for (const task of project.tasks) {
-			// create a worksheet for the current project
-			var projectWorksheet = XLSX.utils.aoa_to_sheet([
-				["task", "subtask", "time"], // header
-				[task.name], // only write the task name in the task column for now
-			]);
+			XLSX.utils.sheet_add_aoa(
+				projectWorksheet,
+				[[task.name]], // only write the task name in the task column for now
+				{ origin: taskOrigin }
+			);
+			// set timeentryOrigin, will always be on the same row as task and column + 1 (column: 0 => task, column: 1 => subtask)
+			var timeentryOrigin = {
+				r: taskOrigin.r,
+				c: taskOrigin.c + 1,
+			};
 			// Loops through each time entry in the current task
 			for (const timeentry of task.timeentries) {
 				// Add subtask data to the worksheet
 				XLSX.utils.sheet_add_aoa(
 					projectWorksheet, // the current worksheet
 					[[timeentry.description, timeentry.duration]], // subtask, time
-					{ origin: { r: 1, c: 1 } } // specify the origin of the data write, { row: 1, column: 1 } => cell B2
+					{ origin: timeentryOrigin } // specify the origin of the data write
 				);
+				// reset timeentryOrigin for next timeentry
+				timeentryOrigin.r++;
 			}
-			// Add this worksheet to the excel workbook and name it using the project name
-			XLSX.utils.book_append_sheet(wb, projectWorksheet, project.name);
+			// reset taskOrigin for next task
+			taskOrigin.r += task.timeentries.length;
 		}
+		// Add this worksheet to the excel workbook and name it using the project name
+		XLSX.utils.book_append_sheet(wb, projectWorksheet, project.name);
 	}
 	// create the excel file with the input filename
 	await XLSX.writeFile(wb, filename + ".xlsx");
 }
 
 // Testing:
-// createExcel("test");
+createTimesheet("test");
