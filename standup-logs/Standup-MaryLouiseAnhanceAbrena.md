@@ -65,7 +65,7 @@ Here's a list of stuff that's blocking me from moving ahead with my work:
 
 Last time, I worked on editing the cli.js file adding the stopTimer to the actionPrompt choice as well as switch.
 
-Today, I'm going to connect with possible testers of our app and work on wrting out scenarios for the app usability testing.
+Today, I'm going to add feedback message when a suser stopped the timer and try to hide the stop timer options when there's no running timer 
 
 Here's a list of stuff that's blocking me from moving ahead with my work:
 - Pulling request and merging using the github desktop 
