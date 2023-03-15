@@ -52,3 +52,11 @@ Last time, I worked on testing the app in the command line and adding a getProdu
 Today, I'm going to touch base with the team working on the api functions and make sure we are on the same page.
 
 Nothing is currently blocking me.
+
+## Mar 15th
+
+Last time, I worked on the stopTimer() function with Carrie and tested it.
+
+Today, I'm going to work with the team to organize a user testing plan and divide up next steps with the API team for the next functions we need.
+
+No blockers!!
