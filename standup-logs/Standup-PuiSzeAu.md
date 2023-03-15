@@ -46,9 +46,21 @@
 ## Mar 8th
 1. what team-related work you did since the last stand-up
     - Update stand-up log for PuiSzeAu
-    - API Team: Create function getWorkspaceID() and getClockifyData()
-    - Have a list of data for timesheet excel
+    - API: Create function getWorkspaceID() and getClockifyData()
+    - API: Have a list of data for timesheet excel (Projects, tasks, timeentries)
 2. what you're gonna do now
-    - API Team: Create function the start and stop timer
+    - API Team: Create function for start and stop timer
+3. anything that's preventing them from working (a 'blocker')
+    - No
+
+## Mar 15th
+1. what team-related work you did since the last stand-up
+    - Update stand-up log for PuiSzeAu
+    - API: Create function startTimer()
+    - API: Functions for timesheet summary
+2. what you're gonna do now
+    - API Team: Create function for creating a new project and task
+    - API Team: Update username
+    - User Testing: Scenario and instructions
 3. anything that's preventing them from working (a 'blocker')
     - No
