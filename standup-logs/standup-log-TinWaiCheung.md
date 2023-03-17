@@ -47,3 +47,10 @@ Here is the link to our Trello: {[link](https://trello.com/b/CL8l3a0i/http5214-t
 - participate in the coding of Creating an excel file
 - help to do the planning of the next few weeks and writing the scope for our project
 - will keep on trying to export the data to excel file
+
+
+15 MAR
+- Looking into teammates' codes of exporting Clockify data to excel file
+- I'm going to format the time data into specific format (count by quarter like 0.25/ 0.5/ 0.75/ 1 )that Bernie required
+- Blocker: I don't know how to change the _H_M_S format
+- will need some more research
