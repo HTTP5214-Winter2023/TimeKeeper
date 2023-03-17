@@ -41,7 +41,6 @@ export async function getWorkspaceID() {
     let user = await response.json();
     apiData.WORKSPACE_ID = user.activeWorkspace;
     apiData.USER_ID = user.id;
-    apiData.USERNAME = user.name;
     await writeApiConfig(apiData);
     return true;
   }
@@ -134,7 +133,6 @@ export async function getTimeentries(id = 0) {
   return await response.json();
 }
 
-// use await startTimer("Writing documentation","63ecf25eee569c5821aed6ff","63ecf2a3feb6c4526152291e") to test function;
 export async function startTimer(description, projectId, taskId) {
   let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/time-entries`;
 
@@ -181,4 +179,6 @@ export async function stopTimer() {
       body: JSON.stringify(postRequest)
     }
   );
+
+  return await response.json();
 }
