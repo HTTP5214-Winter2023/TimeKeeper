@@ -60,3 +60,12 @@ Today, I'm going to touch base with the team and catch up with everything on a c
 
 Here's a list of stuff that's blocking me from moving ahead with my work:
 - Familiarizing myself with the whole project
+
+## March 15th
+
+Last time, I worked on editing the cli.js file adding the stopTimer to the actionPrompt choice as well as switch.
+
+Today, I'm going to add feedback message when a suser stopped the timer and try to hide the stop timer options when there's no running timer 
+
+Here's a list of stuff that's blocking me from moving ahead with my work:
+- Pulling request and merging using the github desktop 

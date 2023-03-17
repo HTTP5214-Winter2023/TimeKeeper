@@ -1,9 +1,10 @@
 import { readApiConfig, writeApiConfig } from './utils.js';
 
 // Object constructors
-function Timeentry(id, description, duration) {
+function Timeentry(id, description, date, duration) {
   this.id = id;
   this.description = description;
+  this.date = date;
   this.duration = duration;
 }
 function Task(id, name, timeentries = []) {
@@ -40,6 +41,7 @@ export async function getWorkspaceID() {
     let user = await response.json();
     apiData.WORKSPACE_ID = user.activeWorkspace;
     apiData.USER_ID = user.id;
+    apiData.USERNAME = user.name;
     await writeApiConfig(apiData);
     return true;
   }
@@ -53,15 +55,20 @@ export async function getWorkspaceID() {
 export async function getClockifyData() {
   // get all useful data (projects, tasks, timeentries)
   var json_projects = await getProjects();
+  var projects = [];
+  var tasks = [];
+  var timeentries = [];
   for (const json_project of json_projects) {
-    var projects = [];
     var json_tasks = await getTasks(json_project.id);
     for (const json_task of json_tasks) {
-      var tasks = [];
       var json_timeentries = await getTimeentries(json_task.id);
       for (const json_timeentry of json_timeentries) {
-        var timeentries = [];
-        var timeentry = new Timeentry(json_timeentry.id, json_timeentry.description, json_timeentry.timeInterval.duration);
+        var timeentry = new Timeentry(
+          json_timeentry.id, 
+          json_timeentry.description, 
+          json_timeentry.timeInterval.start.substring(0, 10), 
+          json_timeentry.timeInterval.duration
+        );
         timeentries.push(timeentry);
       };
       var task = new Task(json_task.id, json_task.name, timeentries);
@@ -70,7 +77,6 @@ export async function getClockifyData() {
     var project = new Project(json_project.id, json_project.name, tasks);
     projects.push(project);
   };
-  console.log(projects);
   return projects;
 }
 
