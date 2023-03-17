@@ -162,13 +162,12 @@ export async function startTimer(description, projectId, taskId) {
   return await response.json();
 }
 
-export async function stopTimer(taskId) {
+export async function stopTimer() {
   let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/user/${apiData.USER_ID}/time-entries`;
 
   let now = new Date();
   let postRequest = {
-    "end": now.toISOString(),
-    "taskId": taskId
+    "end": now.toISOString()
   };
 
   var response = await fetch(
