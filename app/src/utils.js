@@ -8,7 +8,8 @@ const __dirname = path.dirname(__filename);
 const DEFAULT_API_DATA = {
     API_KEY: "",
     WORKSPACE_ID: "",
-    USER_ID: ""
+    USER_ID: "",
+    USERNAME: ""
 }
 
 export async function readApiConfig() {
@@ -26,3 +27,31 @@ export async function writeApiConfig(config) {
     console.log(`Configuration updated in ${__dirname}/config.json`);
     await fs.promises.writeFile(__dirname + "/../config.json", JSON.stringify(config, null, 2), function () {});
 };
+
+// change duration format 'PT1H4M' to '01:04'
+export function formatDuration(durationStr) {
+    if (!durationStr) {
+      return "N/A";
+    }
+    var duration = /P(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?/g.exec(durationStr);
+    var hours = parseInt(duration[2]) || 0;
+    var minutes = parseInt(duration[3]) || 0;
+    var timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    return timeString;
+  }
+  
+  // change startTime || endTime format '2023-03-14T01:49:59Z' to '2023-03-14 01:49:59'
+    export function timeConvert(dateString) {
+    if (!dateString) {
+      return "N/A";
+    }
+    var date = dateString.slice(0, 10);
+    var time = dateString.slice(11, 19);
+    return date +" "+ time;
+  }
+
+
+
+
+
+
