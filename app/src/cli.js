@@ -21,6 +21,17 @@ const ACTIONS = {
 
 let config;
 
+const checkAPIConfig = async function () {
+  config = await readApiConfig();
+  //Ask the user to setup API key if it is not setup yet
+  if (!config || !config.API_KEY || config.API_KEY === "") {
+    console.log(
+      "You may visit https://app.clockify.me/user/settings to get your api Key."
+    );
+    await callAPIKeyPrompt();
+  }
+};
+
 const callAPIKeyPrompt = async function () {
   const APIKeyPrompt = inquirer.createPromptModule();
   await APIKeyPrompt([
@@ -48,8 +59,6 @@ const callAPIKeyPrompt = async function () {
       console.log(error);
     });
 };
-
-
 
 const callProjectPrompt = async function (projects) {
   const projectPrompt = inquirer.createPromptModule();
@@ -96,7 +105,6 @@ const callProjectPrompt = async function (projects) {
     tasksData = [];
   } 
 }
-
 
 const callStartTimerPrompt = async function () {
   const startTimerPrompt = inquirer.createPromptModule();
@@ -215,12 +223,7 @@ export async function startCli() {
   config = await readApiConfig();
 
   //Ask the user to setup API key if it is not setup yet
-  if (!config || !config.API_KEY || config.API_KEY === "") {
-    console.log(
-      "You may visit https://app.clockify.me/user/settings to get your api Key."
-    );
-    await callAPIKeyPrompt();
-  }
+  await checkAPIConfig();
 
   //Ask the user for the next actions
   let action;
@@ -290,4 +293,38 @@ export async function startCli() {
 
   // Back to the menu
   await startCli();
+}
+
+export async function startTimerFromCli(projectName, taskName, description) {
+
+  await checkAPIConfig();
+
+  //Find Project
+  const projects = await getProjects();
+  if ( !projects || projects == 0) {
+    console.log("No project is found");
+    return;
+  };
+  const project = projects.find( p => p.name == projectName);
+  if (!project) {
+    console.log(`${projectName} is not found.`);
+    return;
+  } 
+
+  //Find Task
+  const tasks = await getTasks(project.id);
+  if ( !tasks || tasks == 0) {
+    console.log(`No tasks are found in ${project.name}`);
+    return;
+  };
+  const task = tasks.find( t => t.name == taskName);
+  if (!task) {
+    console.log(`${taskName} is not found.`);
+    return;
+  } 
+
+  await startTimer(description, project.id, task.id);
+  console.log(
+    `A timer has been started for ${description} on ${project.name} - ${task.name}`
+  );
 }
