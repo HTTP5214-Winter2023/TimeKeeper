@@ -8,7 +8,12 @@ import {
   startTimer,
   stopTimer,
 } from "./api.js";
-import { readApiConfig, writeApiConfig, formatDuration, timeConvert } from "./utils.js";
+import {
+  readApiConfig,
+  writeApiConfig,
+  formatDuration,
+  timeConvert,
+} from "./utils.js";
 
 const ACTIONS = {
   EXPORT_EXCEL: "exportExcel",
@@ -49,23 +54,21 @@ const callAPIKeyPrompt = async function () {
     });
 };
 
-
-
 const callProjectPrompt = async function (projects) {
   const projectPrompt = inquirer.createPromptModule();
   var projects = await getProjects();
 
   const answer = await projectPrompt([
     {
-      type: 'list',
-      name: 'project',
-      message: 'Please select a project:',
-      choices: projects.map(project => ({
+      type: "list",
+      name: "project",
+      message: "Please select a project:",
+      choices: projects.map((project) => ({
         name: project.name,
-        value: project.id
+        value: project.id,
       })),
-    }
-  ])
+    },
+  ]);
 
   // Call the getTasks() function to retrieve the list of tasks for the selected project
   const tasks = await getTasks(answer.project);
@@ -75,7 +78,7 @@ const callProjectPrompt = async function (projects) {
   for (const task of tasks) {
     const timeentries = await getTimeentries(task.id);
 
-    console.log("\x1b[36m%s\x1b[0m","Task Name: "+task.name);
+    console.log("\x1b[36m%s\x1b[0m", "Task Name: " + task.name);
 
     for (const entry of timeentries) {
       var duration = formatDuration(entry.timeInterval.duration);
@@ -92,11 +95,10 @@ const callProjectPrompt = async function (projects) {
       });
     }
     // display the task data in a table format
-    console.table(tasksData); 
+    console.table(tasksData);
     tasksData = [];
-  } 
-}
-
+  }
+};
 
 const callStartTimerPrompt = async function () {
   const startTimerPrompt = inquirer.createPromptModule();
@@ -107,6 +109,7 @@ const callStartTimerPrompt = async function () {
   let selectedProject;
   let projectChoices = [];
   let taskChoices = [];
+  let stopTimerChoices = stopTimer;
   projects.forEach((p) => projectChoices.push({ name: p.name, value: p }));
   projectChoices.push({
     name: "New Project",
@@ -209,6 +212,22 @@ const callStartTimerPrompt = async function () {
   console.log(
     `A timer has been started for ${description} on ${selectedProject.name} - ${selectedTask.name}`
   );
+  // when user have started their timer, stop timer shows up
+  const stopTimerPrompt = inquirer.createPromptModule();
+  await stopTimerPrompt([
+    {
+      type: "input",
+      name: "stopTimer",
+      message: "Are you sure you want to stop the timer?",
+    },
+  ])
+    .then(async () => {
+      await stopTimer;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  console.log(`The timer has been stopped for ${selectedProject.name}!`);
 };
 
 export async function startCli() {
@@ -236,12 +255,8 @@ export async function startCli() {
           value: ACTIONS.START_TIMER,
         },
         {
-          name: "Stop Current Timer",
-          value: ACTIONS.STOP_CURRENT_TIMER,
-        },
-        {
-          name: "Check Projects List", 
-          value: ACTIONS.CHECK_PROJECTS
+          name: "Check Projects List",
+          value: ACTIONS.CHECK_PROJECTS,
         },
         {
           name: "Export Timesheet to Excel File",
@@ -269,9 +284,6 @@ export async function startCli() {
   switch (action) {
     case ACTIONS.START_TIMER:
       await callStartTimerPrompt();
-      break;
-    case ACTIONS.STOP_CURRENT_TIMER:
-      await stopTimer();
       break;
     case ACTIONS.CHECK_PROJECTS:
       await callProjectPrompt();
