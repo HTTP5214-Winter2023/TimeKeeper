@@ -259,6 +259,10 @@ export async function startCli() {
           value: ACTIONS.CHECK_PROJECTS,
         },
         {
+          name: "Check Projects List",
+          value: ACTIONS.CHECK_PROJECTS,
+        },
+        {
           name: "Export Timesheet to Excel File",
           value: ACTIONS.EXPORT_EXCEL,
         },
@@ -284,6 +288,9 @@ export async function startCli() {
   switch (action) {
     case ACTIONS.START_TIMER:
       await callStartTimerPrompt();
+      break;
+    case ACTIONS.CHECK_PROJECTS:
+      await callProjectPrompt();
       break;
     case ACTIONS.CHECK_PROJECTS:
       await callProjectPrompt();
