@@ -1,6 +1,8 @@
 import { getClockifyData } from "./api.js";
 import * as XLSX from "xlsx";
-import { homedir } from "os";
+import { exportTime } from './utils.js';
+import * as XLSXStyle from "xlsx-style";
+
 
 /**
  * This function will create the timesheet excel file with the input filename in .xlsx extension
@@ -15,7 +17,7 @@ async function createTimesheet(filename) {
 	for (const project of jsonData) {
 		// create a worksheet for the current project
 		var projectWorksheet = XLSX.utils.aoa_to_sheet([
-			["task", "subtask", "time"], // header
+			["Task", "Subtask", "Time(Hr)"], // header
 		]);
 		// set taskOrigin
 		var taskOrigin = {
@@ -39,31 +41,51 @@ async function createTimesheet(filename) {
 				// Add subtask data to the worksheet
 				XLSX.utils.sheet_add_aoa(
 					projectWorksheet, // the current worksheet
-					[[timeentry.description, timeentry.duration]], // subtask, time
+					[[timeentry.description, {t: "n", v: exportTime(timeentry.duration)}]], // subtask, time
 					{ origin: timeentryOrigin } // specify the origin of the data write
+
 				);
 				// reset timeentryOrigin for next timeentry
 				timeentryOrigin.r++;
 			}
 			// reset taskOrigin for next task
 			taskOrigin.r += task.timeentries.length;
+			// The total numbers of the data
+			var totalRow = taskOrigin.r;
 		}
+		//Adding the TOTAL number of the hours
+		XLSX.utils.sheet_add_aoa(
+			projectWorksheet,
+			[["TOTAL:","",{f:`SUM(C2:C${totalRow})`}]],
+			{ origin: taskOrigin });
+		
+		// Trying to style the cell with colors
+		// const cellB2 = XLSX.utils.encode_cell({r: 1, c: 1});
+		// const styleB2 = {fill: {fgColor: {rgb: "3399ff"}}};
+		// projectWorksheet[cellB2] = Object.assign({}, projectWorksheet[cellB2], {s: styleB2});
+
 		// Add this worksheet to the excel workbook and name it using the project name
 		XLSX.utils.book_append_sheet(wb, projectWorksheet, project.name);
 	}
-	let timestamp = new Date();
-	if (!filename) {
-		filename =
-			"timesheet_" +
-			timestamp
-				.toISOString()
-				.split(".")[0]
-				.replaceAll(":", "")
-				.replaceAll("-", "");
-	}
-	// create the excel file with the input filename in the Downloads folder
-	await XLSX.writeFile(wb, homedir() + "/Downloads/" + filename + ".xlsx");
+
+	
+
+	// create the excel file with the input filename
+	await XLSX.writeFile(wb, filename + ".xlsx");
+
+	// var workbook = XLSX.readFile(filename + ".xlsx");
+	// const cellB2 = XLSX.utils.encode_cell({r: 1, c: 1});
+	// const styleB2 = {fill: {fgColor: {rgb: "3399ff"}}};
+	// worksheet = workbook["HTTP5213"];
+	// worksheet[cellB2] = Object.assign({}, worksheet[cellB2], {s: styleB2});
+
+	// const cellB2 = XLSX.utils.encode_cell({r: 1, c: 1});
+	// const styleB2 = {fill: {fgColor: {rgb: "3399ff"}}};
+	// var worksheet = wb["HTTP5213"];
+	// worksheet[cellB2] = Object.assign({}, worksheet[cellB2], {s: styleB2});
+
+	// await XLSXStyle.default.write(wb);
 }
 
 // Testing:
-createTimesheet();
+createTimesheet("test");

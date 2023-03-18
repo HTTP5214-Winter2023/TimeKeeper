@@ -46,6 +46,31 @@ export function formatDuration(durationStr) {
 
 
 
+  export function formatClockifyTimeToRoundedDecimalTime(time) {
+    const [hours, minutes] = time.split(':').map(Number); // split time into hours and minutes
+    const totalMinutes = hours * 60 + minutes; // convert hours to minutes and add to minutes
+    const decimalTime = totalMinutes / 60; // convert total minutes to decimal time
+    const roundedDecimalTime = Math.ceil(decimalTime * 4) / 4; // round decimal time up to nearest quarter-hour
+    return roundedDecimalTime.toFixed(2); // format decimal time to two decimal places
+  }
+
+  export function exportTime(timeString){
+    var duration = formatDuration(timeString);
+    var decimalTimeByQuarter = formatClockifyTimeToRoundedDecimalTime(duration) ;
+    return decimalTimeByQuarter;
+  }
+
+const time = '2:30'; // example Clockify time
+const decimalTime = formatClockifyTimeToRoundedDecimalTime(time); // convert to decimal time
+console.log(decimalTime); // output: 2.50
+
+console.log("Vita functionL: ", exportTime("PT1H46M"));
+  
+
+
+
+
+
 
 
 
