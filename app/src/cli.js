@@ -109,7 +109,6 @@ const callStartTimerPrompt = async function () {
   let selectedProject;
   let projectChoices = [];
   let taskChoices = [];
-  let stopTimerChoices = stopTimer;
   projects.forEach((p) => projectChoices.push({ name: p.name, value: p }));
   projectChoices.push({
     name: "New Project",
