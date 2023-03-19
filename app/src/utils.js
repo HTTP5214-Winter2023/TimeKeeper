@@ -60,11 +60,7 @@ export function formatDuration(durationStr) {
     return decimalTimeByQuarter;
   }
 
-const time = '2:30'; // example Clockify time
-const decimalTime = formatClockifyTimeToRoundedDecimalTime(time); // convert to decimal time
-console.log(decimalTime); // output: 2.50
 
-console.log("Vita functionL: ", exportTime("PT1H46M"));
   
 
 

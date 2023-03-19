@@ -9,6 +9,7 @@ import {
   stopTimer,
 } from "./api.js";
 import { readApiConfig, writeApiConfig, formatDuration, timeConvert } from "./utils.js";
+import { createTimesheet } from "./report.js";
 
 const ACTIONS = {
   EXPORT_EXCEL: "exportExcel",
@@ -277,7 +278,7 @@ export async function startCli() {
       await callProjectPrompt();
       break;
     case ACTIONS.EXPORT_EXCEL:
-      await getClockifyData();
+      await createTimesheet();
       console.log("Exporting Excel File......");
       break;
     case ACTIONS.SET_API_KEY:

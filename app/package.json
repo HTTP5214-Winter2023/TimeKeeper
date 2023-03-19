@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "inquirer": "^8.2.5",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "xlsx-style": "^0.8.13"
   }
 }
