@@ -26,6 +26,17 @@ const ACTIONS = {
 
 let config;
 
+const checkAPIConfig = async function () {
+  config = await readApiConfig();
+  //Ask the user to setup API key if it is not setup yet
+  if (!config || !config.API_KEY || config.API_KEY === "") {
+    console.log(
+      "You may visit https://app.clockify.me/user/settings to get your api Key."
+    );
+    await callAPIKeyPrompt();
+  }
+};
+
 const callAPIKeyPrompt = async function () {
   const APIKeyPrompt = inquirer.createPromptModule();
   await APIKeyPrompt([
@@ -214,21 +225,19 @@ const callStartTimerPrompt = async function () {
 };
 
 export async function startCli() {
-  config = await readApiConfig();
 
   //Ask the user to setup API key if it is not setup yet
-  if (!config || !config.API_KEY || config.API_KEY === "") {
-    console.log(
-      "You may visit https://app.clockify.me/user/settings to get your api Key."
-    );
-    await callAPIKeyPrompt();
-  }
+  await checkAPIConfig();
 
   //Choiced for action prompt:
   let choices = [
     {
       name: "Start a New Timer",
       value: ACTIONS.START_TIMER,
+    },
+    {
+      name: "Stop Current Timer",
+      value: ACTIONS.STOP_CURRENT_TIMER,
     },
     {
       name: "Check Projects List",
@@ -249,22 +258,23 @@ export async function startCli() {
   ];
 
   // Check whether there is running timer.
-  // 1. Get all time entreis (getClockifyData)
-  let haveRunningTimer = true;
-  let timeentries = await getTimeentries();
-  // 2. check on each one to see whether there is an entry without "end" value
-  console.log(timeentries);
+  let haveRunningTimer = false;
+  let runningTimeEntry;
+  let timeEntries = await getTimeentries();
 
-  for (const entry of timeentries) {
-  }
+  for (const entry of timeEntries) {
+    // If there is a record without end value
+    if (entry.timeInterval.end == null) {
+      haveRunningTimer = true;
+      runningTimeEntry = entry;
+    } 
+  };
 
-  // if (duration === null && endTime === null) {
   if (haveRunningTimer) {
-    choices.push({
-      name: "Stop Current Timer",
-      value: ACTIONS.STOP_CURRENT_TIMER,
-    });
-  }
+    choices = choices.filter( c => c.value !== ACTIONS.START_TIMER);
+  } else {
+    choices = choices.filter( c => c.value !== ACTIONS.STOP_CURRENT_TIMER);
+  };
 
   //Ask the user for the next actions
   let action;
@@ -291,7 +301,7 @@ export async function startCli() {
       break;
     case ACTIONS.STOP_CURRENT_TIMER:
       await stopTimer(); //API stop the running timer.
-      console.log("The timer has now stopped.");
+      console.log(`The timer has now stopped for ${runningTimeEntry.description} .`);
       break;
     case ACTIONS.CHECK_PROJECTS:
       await callProjectPrompt();
@@ -310,4 +320,38 @@ export async function startCli() {
 
   // Back to the menu
   await startCli();
+}
+
+export async function startTimerFromCli(projectName, taskName, description) {
+
+  await checkAPIConfig();
+
+  //Find Project
+  const projects = await getProjects();
+  if ( !projects || projects == 0) {
+    console.log("No project is found");
+    return;
+  };
+  const project = projects.find( p => p.name == projectName);
+  if (!project) {
+    console.log(`${projectName} is not found.`);
+    return;
+  } 
+
+  //Find Task
+  const tasks = await getTasks(project.id);
+  if ( !tasks || tasks == 0) {
+    console.log(`No tasks are found in ${project.name}`);
+    return;
+  };
+  const task = tasks.find( t => t.name == taskName);
+  if (!task) {
+    console.log(`${taskName} is not found.`);
+    return;
+  } 
+
+  await startTimer(description, project.id, task.id);
+  console.log(
+    `A timer has been started for ${description} on ${project.name} - ${task.name}`
+  );
 }
