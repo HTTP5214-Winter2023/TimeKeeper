@@ -114,6 +114,27 @@ export async function getTasks(id) {
   return await response.json();
 }
 
+export async function addTask(id) {
+  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects/${id}/tasks`;
+  
+    let postRequest = {
+    "name": name
+  };
+
+  var response = await fetch(
+    reqUrl,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "X-Api-Key": apiData.API_KEY
+      }
+    }
+  );
+  
+  return await response.json();
+}
+
 export async function getTimeentries(id = 0) {
   let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/user/${apiData.USER_ID}/time-entries`;
   if (id != 0) {
@@ -181,25 +202,4 @@ export async function stopTimer() {
       body: JSON.stringify(postRequest)
     }
   );
-}
-
-export async function addTask(id) {
-  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects/${id}/tasks`;
-  
-    let postRequest = {
-    "name": name
-  };
-
-  var response = await fetch(
-    reqUrl,
-    {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "X-Api-Key": apiData.API_KEY
-      }
-    }
-  );
-  
-  return await response.json();
 }
