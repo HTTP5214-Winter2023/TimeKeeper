@@ -182,3 +182,20 @@ export async function stopTimer() {
     }
   );
 }
+
+export async function addTasks(id) {
+  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects/${id}/tasks`;
+
+  var response = await fetch(
+    reqUrl,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "X-Api-Key": apiData.API_KEY
+      }
+    }
+  );
+  
+  return await response.json();
+}
