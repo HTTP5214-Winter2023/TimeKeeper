@@ -1,4 +1,4 @@
-import { readApiConfig, writeApiConfig } from './utils.js';
+import { readApiConfig, writeApiConfig } from "./utils.js";
 
 // Object constructors
 function Timeentry(id, description, date, duration) {
@@ -26,26 +26,21 @@ export async function getWorkspaceID() {
 
   let reqUrl = `${clockify}/user`;
 
-  var response = await fetch(
-    reqUrl,
-    {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        "X-Api-Key": apiData.API_KEY
-      }
-    }
-  );
+  var response = await fetch(reqUrl, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      "X-Api-Key": apiData.API_KEY,
+    },
+  });
 
   if (response.status === 200) {
     let user = await response.json();
     apiData.WORKSPACE_ID = user.activeWorkspace;
     apiData.USER_ID = user.id;
-    apiData.USERNAME = user.name;
     await writeApiConfig(apiData);
     return true;
-  }
-  else {
+  } else {
     //Remove invalid api key
     await writeApiConfig({});
     return false;
@@ -64,53 +59,84 @@ export async function getClockifyData() {
       var json_timeentries = await getTimeentries(json_task.id);
       for (const json_timeentry of json_timeentries) {
         var timeentry = new Timeentry(
-          json_timeentry.id, 
-          json_timeentry.description, 
-          json_timeentry.timeInterval.start.substring(0, 10), 
+          json_timeentry.id,
+          json_timeentry.description,
+          json_timeentry.timeInterval.start.substring(0, 10),
           json_timeentry.timeInterval.duration
         );
         timeentries.push(timeentry);
-      };
+      }
       var task = new Task(json_task.id, json_task.name, timeentries);
       tasks.push(task);
-    };
+    }
     var project = new Project(json_project.id, json_project.name, tasks);
     projects.push(project);
-  };
+  }
   return projects;
 }
 
 export async function getProjects() {
   let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects`;
 
-  var response = await fetch(
-    reqUrl,
-    {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        "X-Api-Key": apiData.API_KEY
-      }
-    }
-  );
-  
+  var response = await fetch(reqUrl, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      "X-Api-Key": apiData.API_KEY,
+    },
+  });
+
+  return await response.json();
+}
+
+export async function addNewProject(name) {
+  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects`;
+
+  let postRequest = {
+    name: name,
+  };
+
+  var response = await fetch(reqUrl, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "X-Api-Key": apiData.API_KEY,
+    },
+    body: JSON.stringify(postRequest),
+  });
+
   return await response.json();
 }
 
 export async function getTasks(id) {
   let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects/${id}/tasks`;
 
-  var response = await fetch(
-    reqUrl,
-    {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        "X-Api-Key": apiData.API_KEY
-      }
-    }
-  );
-  
+  var response = await fetch(reqUrl, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      "X-Api-Key": apiData.API_KEY,
+    },
+  });
+
+  return await response.json();
+}
+
+export async function addTask(id) {
+  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects/${id}/tasks`;
+
+  let postRequest = {
+    name: name,
+  };
+
+  var response = await fetch(reqUrl, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "X-Api-Key": apiData.API_KEY,
+    },
+  });
+
   return await response.json();
 }
 
@@ -120,45 +146,38 @@ export async function getTimeentries(id = 0) {
     reqUrl += `?task=${id}`;
   }
 
-  var response = await fetch(
-    reqUrl,
-    {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        "X-Api-Key": apiData.API_KEY
-      }
-    }
-  );
+  var response = await fetch(reqUrl, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      "X-Api-Key": apiData.API_KEY,
+    },
+  });
 
   return await response.json();
 }
 
-// use await startTimer("Writing documentation","63ecf25eee569c5821aed6ff","63ecf2a3feb6c4526152291e") to test function;
 export async function startTimer(description, projectId, taskId) {
   let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/time-entries`;
 
   let now = new Date();
   let postRequest = {
-    "start": now.toISOString(),
-    "billable": "true",
-    "description": description,
-    "projectId": projectId,
-    "taskId": taskId
+    start: now.toISOString(),
+    billable: "true",
+    description: description,
+    projectId: projectId,
+    taskId: taskId,
   };
 
-  var response = await fetch(
-    reqUrl,
-    {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "X-Api-Key": apiData.API_KEY,
-      },
-      body: JSON.stringify(postRequest)
-    }
-  );
-  
+  var response = await fetch(reqUrl, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "X-Api-Key": apiData.API_KEY,
+    },
+    body: JSON.stringify(postRequest),
+  });
+
   return await response.json();
 }
 
@@ -167,18 +186,15 @@ export async function stopTimer() {
 
   let now = new Date();
   let postRequest = {
-    "end": now.toISOString()
+    end: now.toISOString(),
   };
 
-  var response = await fetch(
-    reqUrl,
-    {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        "X-Api-Key": apiData.API_KEY,
-      },
-      body: JSON.stringify(postRequest)
-    }
-  );
+  var response = await fetch(reqUrl, {
+    method: "PATCH",
+    headers: {
+      "content-type": "application/json",
+      "X-Api-Key": apiData.API_KEY,
+    },
+    body: JSON.stringify(postRequest),
+  });
 }
