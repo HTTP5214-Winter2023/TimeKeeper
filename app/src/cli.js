@@ -237,6 +237,10 @@ export async function startCli() {
       value: ACTIONS.START_TIMER,
     },
     {
+      name: "Stop Current Timer",
+      value: ACTIONS.STOP_CURRENT_TIMER,
+    },
+    {
       name: "Check Projects List",
       value: ACTIONS.CHECK_PROJECTS,
     },
@@ -255,22 +259,23 @@ export async function startCli() {
   ];
 
   // Check whether there is running timer.
-  // 1. Get all time entreis (getClockifyData)
-  let haveRunningTimer = true;
-  let timeentries = await getTimeentries();
-  // 2. check on each one to see whether there is an entry without "end" value
-  console.log(timeentries);
+  let haveRunningTimer = false;
+  let runningTimeEntry;
+  let timeEntries = await getTimeentries();
 
-  for (const entry of timeentries) {
-  }
+  for (const entry of timeEntries) {
+    // If there is a record without end value
+    if (entry.timeInterval.end == null) {
+      haveRunningTimer = true;
+      runningTimeEntry = entry;
+    } 
+  };
 
-  // if (duration === null && endTime === null) {
   if (haveRunningTimer) {
-    choices.push({
-      name: "Stop Current Timer",
-      value: ACTIONS.STOP_CURRENT_TIMER,
-    });
-  }
+    choices = choices.filter( c => c.value !== ACTIONS.START_TIMER);
+  } else {
+    choices = choices.filter( c => c.value !== ACTIONS.STOP_CURRENT_TIMER);
+  };
 
   //Ask the user for the next actions
   let action;
@@ -297,7 +302,7 @@ export async function startCli() {
       break;
     case ACTIONS.STOP_CURRENT_TIMER:
       await stopTimer(); //API stop the running timer.
-      console.log("The timer has now stopped.");
+      console.log(`The timer has now stopped for ${runningTimeEntry.description} .`);
       break;
     case ACTIONS.CHECK_PROJECTS:
       await callProjectPrompt();
