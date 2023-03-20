@@ -80,15 +80,15 @@ export async function createTimesheet(filename) {
 		// Add this worksheet to the excel workbook and name it using the project name
 		XLSX.utils.book_append_sheet(wb, projectWorksheet, project.name);
 	}
-	let timestamp = new Date();
 	if (!filename) {
-		filename =
-			"timesheet_" +
-			timestamp
-				.toISOString()
-				.split(".")[0]
-				.replaceAll(":", "")
-				.replaceAll("-", "");
+		// https://stackoverflow.com/questions/10830357/javascript-toisostring-ignores-timezone-offset
+		var tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
+		var localISOTime = new Date(Date.now() - tzoffset)
+			.toISOString()
+			.split(".")[0]
+			.replaceAll(":", "")
+			.replaceAll("-", "");
+		filename = "timesheet_" + localISOTime;
 	}
 	// create the excel file with the input filename in the Downloads folder
 	await XLSXStyle.default.writeFile(
