@@ -225,7 +225,6 @@ const callStartTimerPrompt = async function () {
 };
 
 export async function startCli() {
-  config = await readApiConfig();
 
   //Ask the user to setup API key if it is not setup yet
   await checkAPIConfig();
