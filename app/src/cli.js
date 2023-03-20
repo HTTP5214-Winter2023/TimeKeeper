@@ -222,6 +222,41 @@ export async function startCli() {
     await callAPIKeyPrompt();
   }
 
+  //Choiced for action prompt:
+  let choices = [
+    {
+      name: "Start a New Timer",
+      value: ACTIONS.START_TIMER,
+    },
+    {
+      name: "Check Projects List", 
+      value: ACTIONS.CHECK_PROJECTS
+    },
+    {
+      name: "Export Timesheet to Excel File",
+      value: ACTIONS.EXPORT_EXCEL,
+    },
+    {
+      name: "Update API Key",
+      value: ACTIONS.SET_API_KEY,
+    },
+    {
+      name: "Exit",
+      value: ACTIONS.EXIT,
+    },
+  ]
+
+  // Check whether there is running timer.
+  
+  // 1. Get all time entreis (getClockifyData)
+  // 2. check on each one to see whether there is an entry without "end" value
+
+  if(!noRunningTimer) choices.push({
+    name: "Stop Current Timer",
+    value: ACTIONS.STOP_CURRENT_TIMER,
+  },)
+
+
   //Ask the user for the next actions
   let action;
   const actionPrompt = inquirer.createPromptModule();
@@ -230,32 +265,7 @@ export async function startCli() {
       type: "list",
       name: "action",
       message: "Please select an action:",
-      choices: [
-        {
-          name: "Start a New Timer",
-          value: ACTIONS.START_TIMER,
-        },
-        {
-          name: "Stop Current Timer",
-          value: ACTIONS.STOP_CURRENT_TIMER,
-        },
-        {
-          name: "Check Projects List", 
-          value: ACTIONS.CHECK_PROJECTS
-        },
-        {
-          name: "Export Timesheet to Excel File",
-          value: ACTIONS.EXPORT_EXCEL,
-        },
-        {
-          name: "Update API Key",
-          value: ACTIONS.SET_API_KEY,
-        },
-        {
-          name: "Exit",
-          value: ACTIONS.EXIT,
-        },
-      ],
+      choices: choices
     },
   ])
     .then((answers) => {
@@ -271,7 +281,8 @@ export async function startCli() {
       await callStartTimerPrompt();
       break;
     case ACTIONS.STOP_CURRENT_TIMER:
-      await stopTimer();
+      await stopTimer(); //API stop the running timer.
+      console.log("xxxxx")
       break;
     case ACTIONS.CHECK_PROJECTS:
       await callProjectPrompt();
