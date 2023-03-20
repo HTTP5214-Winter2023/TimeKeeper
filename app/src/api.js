@@ -97,6 +97,28 @@ export async function getProjects() {
   return await response.json();
 }
 
+export async function addNewProject(name) {
+  let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects`;
+
+  let postRequest = {
+    "name": name
+  };
+
+  var response = await fetch(
+    reqUrl, 
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "X-Api-Key": apiData.API_KEY
+      },
+      body: JSON.stringify(postRequest)
+    }
+  );
+
+  return await response.json();
+}
+
 export async function getTasks(id) {
   let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects/${id}/tasks`;
 
