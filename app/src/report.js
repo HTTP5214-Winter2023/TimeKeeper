@@ -1,5 +1,6 @@
 import { getClockifyData } from "./api.js";
 import * as XLSX from "xlsx";
+import { homedir } from "os";
 
 /**
  * This function will create the timesheet excel file with the input filename in .xlsx extension
@@ -50,9 +51,19 @@ async function createTimesheet(filename) {
 		// Add this worksheet to the excel workbook and name it using the project name
 		XLSX.utils.book_append_sheet(wb, projectWorksheet, project.name);
 	}
-	// create the excel file with the input filename
-	await XLSX.writeFile(wb, filename + ".xlsx");
+	let timestamp = new Date();
+	if (!filename) {
+		filename =
+			"timesheet_" +
+			timestamp
+				.toISOString()
+				.split(".")[0]
+				.replaceAll(":", "")
+				.replaceAll("-", "");
+	}
+	// create the excel file with the input filename in the Downloads folder
+	await XLSX.writeFile(wb, homedir() + "/Downloads/" + filename + ".xlsx");
 }
 
 // Testing:
-createTimesheet("test");
+createTimesheet();
