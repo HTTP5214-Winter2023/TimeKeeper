@@ -183,8 +183,12 @@ export async function stopTimer() {
   );
 }
 
-export async function addTasks(id) {
+export async function addTask(id) {
   let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects/${id}/tasks`;
+  
+    let postRequest = {
+    "name": name
+  };
 
   var response = await fetch(
     reqUrl,
