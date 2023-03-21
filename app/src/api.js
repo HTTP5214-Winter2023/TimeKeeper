@@ -122,7 +122,7 @@ export async function getTasks(id) {
   return await response.json();
 }
 
-export async function addTask(id) {
+export async function addTask(id, name) {
   let reqUrl = `${clockify}/workspaces/${apiData.WORKSPACE_ID}/projects/${id}/tasks`;
 
   let postRequest = {
@@ -135,6 +135,7 @@ export async function addTask(id) {
       "content-type": "application/json",
       "X-Api-Key": apiData.API_KEY,
     },
+    body: JSON.stringify(postRequest),
   });
 
   return await response.json();

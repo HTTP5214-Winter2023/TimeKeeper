@@ -7,6 +7,8 @@ import {
   getTimeentries,
   startTimer,
   stopTimer,
+  addNewProject,
+  addTask
 } from "./api.js";
 import {
   readApiConfig,
@@ -14,6 +16,9 @@ import {
   formatDuration,
   timeConvert,
 } from "./utils.js";
+import{
+  createTimesheet,
+} from "./report.js";
 
 const ACTIONS = {
   EXPORT_EXCEL: "exportExcel",
@@ -151,8 +156,10 @@ const callStartTimerPrompt = async function () {
         message: "What is the new project name?",
       },
     ])
+      // call api to add new project
       .then(async (answers) => {
-        // call api to add new project
+        const newProject = await addNewProject(answers.projectName);
+        selectedProject = newProject;
       })
       .catch((error) => {
         console.log(error);
@@ -193,8 +200,10 @@ const callStartTimerPrompt = async function () {
         message: "What is the new task name?",
       },
     ])
+      // call api to add new task
       .then(async (answers) => {
-        // call api to add new task
+        const newTask = await addTask(selectedProject.id, answers.taskName);
+        selectedTask = newTask;
       })
       .catch((error) => {
         console.log(error);
