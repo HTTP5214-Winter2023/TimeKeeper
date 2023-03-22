@@ -28,3 +28,22 @@
 5. Joined the CLI team
 6. Going to learn CLI next week
 7. The blocker is short of time, have to work on every assignments at the same time 
+## Mar 08th, 2023
+1. Stand-up meeting
+2. Learned CLI and APIs in Node.js 
+3. Learned how to intergrate everything together
+4. Adding more features next week
+## Mar 15th, 2023
+1. Searched information for CLI
+2. CLI coding for 'projects', 'tasks' and 'time entries'
+3. Code review
+4. Adding more features next week
+## Mar 22th, 2023
+1. Finished all the features on CLI
+2. Application debug
+3. Preparing for user test
+
+
+
+
+
