@@ -5,7 +5,7 @@ Testing Onervations:
 - User is not sure if application has started, or if he is suppose to exit the application 
 - User is able to start the time
 - User was able to export the file
-- User was able to download and find the excel file 
+- User was able to download and find the excel file with assitance
 - User started another test, and is waiting longer before stopping the time
 - The whole test took user 5:52 minutes to complete
 
@@ -45,7 +45,7 @@ Testing Onervations
 - User was able to start the timer 
 - User was able to stop timer and check the project summary 
 - User was able to export data to excel 
-- User was able to view the downloaded excel file 
+- User was able to view the downloaded excel file and view it in downloads with assistance 
 - User test took 3:16 minutes
 
 Interview Questions:
@@ -110,7 +110,7 @@ Interview Questions:
 -
 
 7. Recommendations?
-- Back a command to go back 
+- "Back options" to go back 
 - 
 -
 
