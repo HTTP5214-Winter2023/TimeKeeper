@@ -26,18 +26,17 @@ Interview Questions:
 
 6. Dislikes?
 - no visible timer 
-- Doesn't realize timer has strated until you stop it
--
+- Doesn't realize timer has been started until you stop it
 
 7. Recommendations?
-- Add a visible running timer through the command line 
-- When user starts the timer, they would like to see the runner going 
+- Add a visible running timer (through the command line) because when user starts the timer, they would like to see the runner going 
 - Would prefer to pause and restart on the task
-- Time needs to stop when your export
-- Change "Stop Current Timer" to "Pause", and "Export Timesheet to Excel" to "Resume" Or don't gibe users the option to export it the timer is running 
+- May adjust the function from "Stop Current Timer" to combined into "Stop timer and Export to excel file"  
+- Or don't give users the option to export the excel file when the timer is still running 
 
 8. Can you see yourself using this to track time for your projects?
 -Yes 
+
 
 ## Tester 2 - Beatrice
 Testing Onervations
@@ -66,13 +65,13 @@ Interview Questions:
 - No pause option
 
 7. Recommendations?
-- Temperary pause option
+- Temperary pause option for washroom break
+- may add some buttons which can be clicked with mouse
 
 8. Can you see yourself using this to track time for your projects?
 - Yes 
 
 ## Tester 3 - Tamara
-
 Testing Onervations
 - User was able to start appliation 
 - User was confused on how to make the project 
@@ -105,21 +104,39 @@ Interview Questions:
 8. Can you see yourself using this to track time for your projects?
 - Yes
 
+
 ## Tester 4 - Stephen 
-Likes 
--
--
--
+Testing Onervations
+- User can start the timer. User is able to type the project’s name and the task’s name.
+- User can view the time summary in the Projects List.
+- User is a bit confused of where to open the download folder/ the excel file.
+- User couldn’t find the spreadsheet in the beginning.
 
-Dislikes
--
--
--
+Interview Questions:
+1. Were you able to start and stop the timer in order to track the time working?
+- Yes
+2. Were you able to view the projects in an excel file?
+- Yes
+3. Is this app easy to use?
+- Yes
+4. Was there anything that confused you? 
+- No
 
-Recommendations
--
--
--
+5. Likes?
+- like the instructions from the CML 
+- like using the arrow keys to run the application
+- like the time summary table and feels good that the time duration can be exported to the excel file.
+
+6. Dislikes?
+- No
+
+7. Recommendations? 
+- Add a 'Pause' to the timer
+- Add a 'Return' to go back from the CML Content list 
+
+8. Can you see yourself using this to track time for your projects?
+- Yes
+
 
 ## Tester 5 - Simon 
 Testing Onervations
