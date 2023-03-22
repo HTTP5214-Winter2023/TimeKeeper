@@ -51,12 +51,12 @@ export async function getClockifyData() {
   // get all useful data (projects, tasks, timeentries)
   var json_projects = await getProjects();
   var projects = [];
-  var tasks = [];
-  var timeentries = [];
   for (const json_project of json_projects) {
     var json_tasks = await getTasks(json_project.id);
+    var tasks = []
     for (const json_task of json_tasks) {
       var json_timeentries = await getTimeentries(json_task.id);
+      var timeentries = [];
       for (const json_timeentry of json_timeentries) {
         var timeentry = new Timeentry(
           json_timeentry.id,
