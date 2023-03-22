@@ -7,9 +7,18 @@ import {
   getTimeentries,
   startTimer,
   stopTimer,
+  addNewProject,
+  addTask
 } from "./api.js";
-import { readApiConfig, writeApiConfig, formatDuration, timeConvert } from "./utils.js";
-import { createTimesheet } from "./report.js";
+import {
+  readApiConfig,
+  writeApiConfig,
+  formatDuration,
+  timeConvert,
+} from "./utils.js";
+import{
+  createTimesheet,
+} from "./report.js";
 
 const ACTIONS = {
   EXPORT_EXCEL: "exportExcel",
@@ -21,6 +30,17 @@ const ACTIONS = {
 };
 
 let config;
+
+const checkAPIConfig = async function () {
+  config = await readApiConfig();
+  //Ask the user to setup API key if it is not setup yet
+  if (!config || !config.API_KEY || config.API_KEY === "") {
+    console.log(
+      "You may visit https://app.clockify.me/user/settings to get your api Key."
+    );
+    await callAPIKeyPrompt();
+  }
+};
 
 const callAPIKeyPrompt = async function () {
   const APIKeyPrompt = inquirer.createPromptModule();
@@ -50,23 +70,21 @@ const callAPIKeyPrompt = async function () {
     });
 };
 
-
-
 const callProjectPrompt = async function (projects) {
   const projectPrompt = inquirer.createPromptModule();
   var projects = await getProjects();
 
   const answer = await projectPrompt([
     {
-      type: 'list',
-      name: 'project',
-      message: 'Please select a project:',
-      choices: projects.map(project => ({
+      type: "list",
+      name: "project",
+      message: "Please select a project:",
+      choices: projects.map((project) => ({
         name: project.name,
-        value: project.id
+        value: project.id,
       })),
-    }
-  ])
+    },
+  ]);
 
   // Call the getTasks() function to retrieve the list of tasks for the selected project
   const tasks = await getTasks(answer.project);
@@ -76,7 +94,7 @@ const callProjectPrompt = async function (projects) {
   for (const task of tasks) {
     const timeentries = await getTimeentries(task.id);
 
-    console.log("\x1b[36m%s\x1b[0m","Task Name: "+task.name);
+    console.log("\x1b[36m%s\x1b[0m", "Task Name: " + task.name);
 
     for (const entry of timeentries) {
       var duration = formatDuration(entry.timeInterval.duration);
@@ -93,11 +111,10 @@ const callProjectPrompt = async function (projects) {
       });
     }
     // display the task data in a table format
-    console.table(tasksData); 
+    console.table(tasksData);
     tasksData = [];
-  } 
-}
-
+  }
+};
 
 const callStartTimerPrompt = async function () {
   const startTimerPrompt = inquirer.createPromptModule();
@@ -139,8 +156,10 @@ const callStartTimerPrompt = async function () {
         message: "What is the new project name?",
       },
     ])
+      // call api to add new project
       .then(async (answers) => {
-        // call api to add new project
+        const newProject = await addNewProject(answers.projectName);
+        selectedProject = newProject;
       })
       .catch((error) => {
         console.log(error);
@@ -181,8 +200,10 @@ const callStartTimerPrompt = async function () {
         message: "What is the new task name?",
       },
     ])
+      // call api to add new task
       .then(async (answers) => {
-        // call api to add new task
+        const newTask = await addTask(selectedProject.id, answers.taskName);
+        selectedTask = newTask;
       })
       .catch((error) => {
         console.log(error);
@@ -213,15 +234,56 @@ const callStartTimerPrompt = async function () {
 };
 
 export async function startCli() {
-  config = await readApiConfig();
 
   //Ask the user to setup API key if it is not setup yet
-  if (!config || !config.API_KEY || config.API_KEY === "") {
-    console.log(
-      "You may visit https://app.clockify.me/user/settings to get your api Key."
-    );
-    await callAPIKeyPrompt();
-  }
+  await checkAPIConfig();
+
+  //Choiced for action prompt:
+  let choices = [
+    {
+      name: "Start a New Timer",
+      value: ACTIONS.START_TIMER,
+    },
+    {
+      name: "Stop Current Timer",
+      value: ACTIONS.STOP_CURRENT_TIMER,
+    },
+    {
+      name: "Check Projects List",
+      value: ACTIONS.CHECK_PROJECTS,
+    },
+    {
+      name: "Export Timesheet to Excel File",
+      value: ACTIONS.EXPORT_EXCEL,
+    },
+    {
+      name: "Update API Key",
+      value: ACTIONS.SET_API_KEY,
+    },
+    {
+      name: "Exit",
+      value: ACTIONS.EXIT,
+    },
+  ];
+
+  // Check whether there is running timer.
+  let haveRunningTimer = false;
+  let runningTimeEntry;
+  let timeEntries = await getTimeentries();
+
+  for (const entry of timeEntries) {
+    // If there is a record without end value
+    if (entry.timeInterval.end == null) {
+      haveRunningTimer = true;
+      runningTimeEntry = entry;
+    } 
+  };
+
+  if (haveRunningTimer) {
+    choices = choices.filter( c => c.value !== ACTIONS.START_TIMER);
+  } else {
+    choices = choices.filter( c => c.value !== ACTIONS.STOP_CURRENT_TIMER);
+  };
 
   //Ask the user for the next actions
   let action;
@@ -231,32 +293,7 @@ export async function startCli() {
       type: "list",
       name: "action",
       message: "Please select an action:",
-      choices: [
-        {
-          name: "Start a New Timer",
-          value: ACTIONS.START_TIMER,
-        },
-        {
-          name: "Stop Current Timer",
-          value: ACTIONS.STOP_CURRENT_TIMER,
-        },
-        {
-          name: "Check Projects List", 
-          value: ACTIONS.CHECK_PROJECTS
-        },
-        {
-          name: "Export Timesheet to Excel File",
-          value: ACTIONS.EXPORT_EXCEL,
-        },
-        {
-          name: "Update API Key",
-          value: ACTIONS.SET_API_KEY,
-        },
-        {
-          name: "Exit",
-          value: ACTIONS.EXIT,
-        },
-      ],
+      choices: choices,
     },
   ])
     .then((answers) => {
@@ -272,7 +309,8 @@ export async function startCli() {
       await callStartTimerPrompt();
       break;
     case ACTIONS.STOP_CURRENT_TIMER:
-      await stopTimer();
+      await stopTimer(); //API stop the running timer.
+      console.log(`The timer has now stopped for ${runningTimeEntry.description} .`);
       break;
     case ACTIONS.CHECK_PROJECTS:
       await callProjectPrompt();
@@ -291,4 +329,38 @@ export async function startCli() {
 
   // Back to the menu
   await startCli();
+}
+
+export async function startTimerFromCli(projectName, taskName, description) {
+
+  await checkAPIConfig();
+
+  //Find Project
+  const projects = await getProjects();
+  if ( !projects || projects == 0) {
+    console.log("No project is found");
+    return;
+  };
+  const project = projects.find( p => p.name == projectName);
+  if (!project) {
+    console.log(`${projectName} is not found.`);
+    return;
+  } 
+
+  //Find Task
+  const tasks = await getTasks(project.id);
+  if ( !tasks || tasks == 0) {
+    console.log(`No tasks are found in ${project.name}`);
+    return;
+  };
+  const task = tasks.find( t => t.name == taskName);
+  if (!task) {
+    console.log(`${taskName} is not found.`);
+    return;
+  } 
+
+  await startTimer(description, project.id, task.id);
+  console.log(
+    `A timer has been started for ${description} on ${project.name} - ${task.name}`
+  );
 }
