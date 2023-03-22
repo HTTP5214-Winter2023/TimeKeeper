@@ -69,3 +69,14 @@
     - Distribute tasks for CLI Team
 3. anything that's preventing them from working (a 'blocker')
     - No
+
+## March 15th
+1. what team-related work you did since the last stand-up
+    - Handle start/stop timer
+    - Distribute tasks for CLI Team
+2. what you're gonna do now
+    - Work on Usability Testing Instructions
+    - Only have stop timer option when there is an task in progress
+    - Fix config file path
+3. anything that's preventing them from working (a 'blocker')
+    - No
