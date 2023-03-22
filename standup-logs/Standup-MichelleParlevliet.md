@@ -60,3 +60,11 @@ Last time, I worked on the stopTimer() function with Carrie and tested it.
 Today, I'm going to work with the team to organize a user testing plan and divide up next steps with the API team for the next functions we need.
 
 No blockers!!
+
+## Mar 22nd
+
+Last time, I tested the first version of the npm package and added addNewProject() to api.js.
+
+Today, I will test the newest version of our npm package and support with user testing if possible (I stayed home because I wasn't feeling well).
+
+No blockers.
