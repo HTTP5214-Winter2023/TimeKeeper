@@ -69,3 +69,13 @@ Today, I'm going to add feedback message when a suser stopped the timer and try 
 
 Here's a list of stuff that's blocking me from moving ahead with my work:
 - Pulling request and merging using the github desktop 
+
+## March 22nd
+
+Last time, I worked on adding function to hide stopTimer when there is no starting timer and adding feedback message when timer is stopped.
+
+Today, I'm the scrum master, so making sure all notes and needed to do for the next following weeks are communicated  
+
+Here's a list of stuff that's blocking me from moving ahead with my work:
+- how to make sure that the stoptimer is not shown when there is no running timer 
+
