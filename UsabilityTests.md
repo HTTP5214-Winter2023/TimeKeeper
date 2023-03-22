@@ -30,7 +30,7 @@ Interview Questions:
 -
 
 7. Recommendations?
-- Add a running timer 
+- Add a visible running timer through the command line 
 - When user starts the timer, they would like to see the runner going 
 - Would prefer to pause and restart on the task
 - Time needs to stop when your export
@@ -61,18 +61,12 @@ Interview Questions:
 5. Likes?
 - Liked the available options provided through the command line
 - easy to use arrows to select options
--
-- 
 
 6. Dislikes?
 - No pause option
-- 
--
 
 7. Recommendations?
 - Temperary pause option
-- 
--
 
 8. Can you see yourself using this to track time for your projects?
 - Yes 
@@ -88,7 +82,6 @@ Testing Onervations
 - User was able to stop the application 
 - Test was completed in 3.13 minutes
 
-
 Interview Questions:
 1. Were you able to start and stop the timer in order to track the time working?
 - Yes, but reaquired assistance as the instructions were not clear
@@ -102,17 +95,12 @@ Interview Questions:
 5. Likes?
 - Liked the finished product
 - Like that it was able to generate an excel file
-- 
 
 6. Dislikes?
 - There's no option to go back 
-- 
--
 
 7. Recommendations?
 - "Back options" to go back 
-- 
--
 
 8. Can you see yourself using this to track time for your projects?
 - Yes
