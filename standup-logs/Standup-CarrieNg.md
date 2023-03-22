@@ -52,3 +52,13 @@
     - Work on the scenario and instructions section of the usability test
 3. anything that's preventing them from working (a 'blocker')
     - No
+
+## Mar 22th
+1. what team-related work you did since the last stand-up
+    - I worked on the addTask function on the api.js file
+    - Tested application through the terminal 
+2. what you're gonna do now
+    - Completed the usability testing in class, and created the UsabiliyTest.md file 
+    - Review and consolidate feedback from user testing and discuss next steps with team
+3. anything that's preventing them from working (a 'blocker')
+    - No
