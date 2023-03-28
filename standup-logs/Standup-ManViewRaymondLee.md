@@ -56,3 +56,13 @@
    - Testing createTimesheet() to see if logging multiple projects would work
 3. anything that's preventing them from working (a 'blocker')
    - No
+
+## Mar 22nd
+
+1. what team-related work you did since the last stand-up
+   - Help Vita implement "add total time" and "change sheet styles" features
+2. what you're gonna do now
+   - User Testing
+   - Implement user feedbacks after testing
+3. anything that's preventing them from working (a 'blocker')
+   - No
