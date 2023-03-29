@@ -1,5 +1,13 @@
 # Stand-up log for Carrie Ng
 
+## Jan 25th
+1. what team-related work you did since the last stand-up
+    - We formed our team and decided to work on timesheet automation 
+2. what you're gonna do now
+    - Look into time sheet automation
+3. anything that's preventing them from working (a 'blocker')
+    - No
+
 ## Feb 1st
 1. what team-related work you did since the last stand-up
     - Started researh on timesheet automation
@@ -53,12 +61,21 @@
 3. anything that's preventing them from working (a 'blocker')
     - No
 
-## Mar 22th
+## Mar 22nd
 1. what team-related work you did since the last stand-up
     - I worked on the addTask function on the api.js file
     - Tested application through the terminal 
 2. what you're gonna do now
     - Completed the usability testing in class, and created the UsabiliyTest.md file 
     - Review and consolidate feedback from user testing and discuss next steps with team
+3. anything that's preventing them from working (a 'blocker')
+    - No
+
+## Mar 29th
+1. what team-related work you did since the last stand-up
+    - Reviewed the results from the usability testing
+2. what you're gonna do now
+    - Reviewed the usability test results as a team, and made a summary of features we could improve on
+    - Start working on updating features
 3. anything that's preventing them from working (a 'blocker')
     - No
