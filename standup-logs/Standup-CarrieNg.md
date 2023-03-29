@@ -61,7 +61,7 @@
 3. anything that's preventing them from working (a 'blocker')
     - No
 
-## Mar 22th
+## Mar 22nd
 1. what team-related work you did since the last stand-up
     - I worked on the addTask function on the api.js file
     - Tested application through the terminal 
