@@ -2,7 +2,8 @@
 Repository for team TimeKeeper's project
 
 # Timesheet Automation
-{https://www.npmjs.com/package/timesheet-automation?activeTab=readme}
+https://www.npmjs.com/package/timesheet-automation?activeTab=readme
+
 This package helps users to track their time on projects and tasks. It uses the Clockify API to track and store the data. Functions include starting a timer, stopping a timer, and exporting timesheets in an Excel file.
 
 ## Setup & Installation
