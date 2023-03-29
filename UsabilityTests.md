@@ -1,7 +1,7 @@
 # Usability Testing - Mar 22, 2023
 
 ## Tester 1 - Anthony 
-Testing Onervations:
+Testing Observations:
 - User is not sure if application has started, or if he is suppose to exit the application 
 - User is able to start the time
 - User was able to export the file
@@ -18,7 +18,6 @@ Interview Questions:
 -Yes
 4. Was there anything that confused you? 
 - No
-
 5. Likes?
 - Interface design of the command line
 - Design of the Excel file
@@ -39,7 +38,7 @@ Interview Questions:
 
 
 ## Tester 2 - Beatrice
-Testing Onervations
+Testing Observations
 - User was able to start and add a project
 - User was able to start the timer 
 - User was able to stop timer and check the project summary 
@@ -72,7 +71,7 @@ Interview Questions:
 - Yes 
 
 ## Tester 3 - Tamara
-Testing Onervations
+Testing Observations
 - User was able to start appliation 
 - User was confused on how to make the project 
 - User was able to start and stop timer 
@@ -106,7 +105,7 @@ Interview Questions:
 
 
 ## Tester 4 - Stephen 
-Testing Onervations
+Testing Observations
 - User can start the timer. User is able to type the project’s name and the task’s name.
 - User can view the time summary in the Projects List.
 - User is a bit confused of where to open the download folder/ the excel file.
@@ -139,7 +138,7 @@ Interview Questions:
 
 
 ## Tester 5 - Simon 
-Testing Onervations
+Testing Observations
 - User was able to start the application
 - User was able to make a project
 - user was able to find the project time summary 
@@ -177,3 +176,13 @@ Interview Questions:
 
 8. Can you see yourself using this to track time for your projects?
 - Yes 
+
+## Summary
+1. No visible timer -> Add a timer on the cli after start 
+2. Pasue option on timer
+3. Excel worksheet -> add a instruction / summary
+4. Add a msg to show that the export excel file is in the download folder
+5. If the timer is started, the users can only stop/pause
+6. may add some buttons which can be clicked with mouse
+7. Add "Back options" to go back
+8. Quciker way to start the timer
