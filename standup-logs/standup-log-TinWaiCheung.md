@@ -64,3 +64,7 @@ Here is the link to our Trello: {[link](https://trello.com/b/CL8l3a0i/http5214-t
 - I interviewed the users in the user-testing and took note.
 
 
+29 MAR
+- I read over the user-testing report again.
+- We discussed about the improvement on the app we can have. 
+- we finished our requirements for the course and can wrap up our work!
