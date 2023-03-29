@@ -79,3 +79,11 @@ Today, I'm the scrum master, so making sure all notes and needed to do for the n
 Here's a list of stuff that's blocking me from moving ahead with my work:
 - how to make sure that the stoptimer is not shown when there is no running timer 
 
+## March 29th
+
+Last time,  our team did the usability testing for our app.
+
+Today, we're going over the usability testing and start working on what is needed to be updated based on the testing.  
+
+Here's a list of stuff that's blocking me from moving ahead with my work:
+- No blockers for this week as we focused on the usability testing for now
