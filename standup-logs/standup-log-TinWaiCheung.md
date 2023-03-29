@@ -54,3 +54,17 @@ Here is the link to our Trello: {[link](https://trello.com/b/CL8l3a0i/http5214-t
 - I'm going to format the time data into specific format (count by quarter like 0.25/ 0.5/ 0.75/ 1 )that Bernie required
 - Blocker: I don't know how to change the _H_M_S format
 - will need some more research
+
+
+22 MAR
+- I coded the formatClockifyTimeToRoundedDecimalTime and the exportTime function so the time data has been formated from _H_M_S to _:_ to decimal number counted by quarter
+- I added the function to the loop that generates the Timesheet 
+- I added the TOTAL time adding row and its value
+- I also added some colors to the cells inside the excel to style it
+- I interviewed the users in the user-testing and took note.
+
+
+29 MAR
+- I read over the user-testing report again.
+- We discussed about the improvement on the app we can have. 
+- we finished our requirements for the course and can wrap up our work!
