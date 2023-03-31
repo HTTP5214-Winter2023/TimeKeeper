@@ -68,3 +68,11 @@ Last time, I tested the first version of the npm package and added addNewProject
 Today, I will test the newest version of our npm package and support with user testing if possible (I stayed home because I wasn't feeling well).
 
 No blockers.
+
+## Mar 29
+
+Last time, I tested the new npm package and reviewed the notes from the user testing done last week.
+
+Today, I met with the team to discuss improvement we could make based on user testing feedback.
+
+No blockers.
