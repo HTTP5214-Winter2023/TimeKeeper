@@ -76,6 +76,15 @@
     - Reviewed the results from the usability testing
 2. what you're gonna do now
     - Reviewed the usability test results as a team, and made a summary of features we could improve on
-    - Start working on updating features
+    - Start thinking about how to update features
 3. anything that's preventing them from working (a 'blocker')
     - No
+
+## Apr 5th
+1. what team-related work you did since the last stand-up
+    - Reviewed the summary of the usability test and discussed improvements
+2. what you're gonna do now
+    - Discuss what we should add to the README.md
+    - Update README.md with pictures 
+3. anything that's preventing them from working (a 'blocker')
+    - No, overall, we have completed the project!
