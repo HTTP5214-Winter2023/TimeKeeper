@@ -74,3 +74,4 @@ Here is the link to our Trello: {[link](https://trello.com/b/CL8l3a0i/http5214-t
 - We went through the summary of the user-testing report and the improvement.
 - Our teammate Daniel made some extra features with the visible timer base on the comment we got. We reviewed and like it!
 - No blockers as we won't be developing for the app for now. 
+- We will add images to the README.md.
