@@ -76,3 +76,11 @@ Last time, I tested the new npm package and reviewed the notes from the user tes
 Today, I met with the team to discuss improvement we could make based on user testing feedback.
 
 No blockers.
+
+## April 5
+
+Last time, we went over the improvements we could make as a team based on the user testing results.
+
+This time, we decided as a team that we would not make any further improvements to our application unless we had extra time (there's a lot to do in other courses).
+
+No blockers, we're done!!
