@@ -66,6 +66,35 @@ export function formatDuration(durationStr) {
     return decimalTimeByQuarter;
   }
 
+  // Conver number of seconds into String, sample: " 1 hour : 20 mins : 45 seconds"
+  export function convertSecondToString(n){
+    const stringSecond = (s) => {
+      return  s == 1? `${s} second`: `${s} seconds`;
+    } 
+
+    const stringMinute = (m) => {
+      return m == 1? `${m} min`: `${m} mins`;
+    }
+
+    const stringHour = (h) => {
+      return h == 1? `${h} hour`: `${h} hours`;
+    }
+
+    if (n < 60) {
+      return stringSecond(n);
+    } else{
+      let mins = Math.floor(n/60);
+      let secs = n % 60;
+      if (mins < 60) {
+        return `${stringMinute(mins)} : ${stringSecond(secs)}`;
+      } else {
+        let hours = Math.floor(mins/60);
+        mins = Math.floor(mins/60);
+        return `${stringHour(hours)} : ${stringMinute(mins)} : ${stringSecond(secs)}`;
+      }
+    }
+  }
+
 
   
 

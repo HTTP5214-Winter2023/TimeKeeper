@@ -80,3 +80,22 @@
     - Fix config file path
 3. anything that's preventing them from working (a 'blocker')
     - No
+
+## March 22nd
+1. what team-related work you did since the last stand-up
+    - Work on Usability Testing Instructions
+    - Only have stop timer option when there is an task in progress
+    - Fix config file path
+2. what you're gonna do now
+    - User Acceptance Test
+3. anything that's preventing them from working (a 'blocker')
+    - No
+
+## March 29th
+1. what team-related work you did since the last stand-up
+    - User Acceptance Test
+2. what you're gonna do now
+    - Update requirement after UAT
+    - Work on providing a visible timer
+3. anything that's preventing them from working (a 'blocker')
+    - No

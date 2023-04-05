@@ -15,6 +15,7 @@ import {
   writeApiConfig,
   formatDuration,
   timeConvert,
+  convertSecondToString
 } from "./utils.js";
 import{
   createTimesheet,
@@ -231,6 +232,39 @@ const callStartTimerPrompt = async function () {
   console.log(
     `A timer has been started for ${description} on ${selectedProject.name} - ${selectedTask.name}`
   );
+
+  // Display timer on CLI
+
+  let sec = 0;
+  let displayString = "";
+
+  // Interval to update timer every seconds
+  let timerInterval = setInterval( function () {
+    sec++;
+    displayString = convertSecondToString(sec);
+    process.stdout.write('Timer: '+ displayString +'\r');
+  }, 1000);
+
+  // Add event listener to the cli to stop the timer 
+  console.log('Press any key to stop the timer');
+
+  process.stdin.setRawMode(true);
+  process.stdin.resume();
+  process.stdin.on('data',function() {
+    process.stdin.setRawMode(false);
+    clearInterval(timerInterval);
+    process.stdin.removeAllListeners('data');
+  });
+
+  // Do not proceeds until users click sth
+  const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
+  while (timerInterval._destroyed !== true) {
+    await sleep(1000);
+  }
+
+  await stopTimer();
+  console.log(`You have spent ${displayString} on ${description}.`)
+
 };
 
 export async function startCli() {
