@@ -95,7 +95,17 @@
 1. what team-related work you did since the last stand-up
     - User Acceptance Test
 2. what you're gonna do now
-    - Update requirement after UAT
+    - Update requirement after User Testing
     - Work on providing a visible timer
+3. anything that's preventing them from working (a 'blocker')
+    - No
+
+## April 5th
+1. what team-related work you did since the last stand-up
+    - Update requirement after User Testing
+    - Work on providing a visible timer
+2. what you're gonna do now
+    - Update README.md
+    - Add new features based on User Testing
 3. anything that's preventing them from working (a 'blocker')
     - No
