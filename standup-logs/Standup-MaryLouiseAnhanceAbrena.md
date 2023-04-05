@@ -87,3 +87,13 @@ Today, we're going over the usability testing and start working on what is neede
 
 Here's a list of stuff that's blocking me from moving ahead with my work:
 - No blockers for this week as we focused on the usability testing for now
+
+
+## April 5th
+
+Last time,  we focus on organizing and doing the documentation base on our user testing.
+
+Today, we focus on collectively deciding what else we can add to the app. The team collectively agreed to do it once we finish with our other projects.   
+
+Here's a list of stuff that's blocking me from moving ahead with my work:
+- No blockers for this week!
