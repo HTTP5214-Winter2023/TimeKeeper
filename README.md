@@ -20,6 +20,7 @@ This package helps users to track their time on projects and tasks. It uses the 
 1. Start the program
 
 `` timer ``
+
 *if the error message 'permission denied' returns, use `` sudo timer ``.
 
 2. Provide your API key from Clockify when first use.
