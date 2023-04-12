@@ -23,7 +23,8 @@ This package helps users to track their time on projects and tasks. It uses the 
 *if the error message 'permission denied' returns, use `` sudo timer ``.
 
 2. Provide your API key from Clockify when first use.
-<img src="/img/api-key.jpg" alt="api-key" width="400px">
+<img src="../img/api-key.png" alt="api-key" width="400px">
+![APIkey](img/api-key.png) width="400px"
 
 3. Use arrow keys to select 'Start a New Timer' from your menu.
 
